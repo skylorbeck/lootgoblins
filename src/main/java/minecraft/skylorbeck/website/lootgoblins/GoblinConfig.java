@@ -20,13 +20,13 @@ public class GoblinConfig implements ConfigData {
     public float enchantedBookChance = 0.25f;
     public int bonusEnchantedBooksMax = 1;
     public float bonusLootEnchantChance = 0.25f;
-
+    public float goblinChance = 0.001f;
+    public int bonusLootMax = 15;
     @ConfigEntry.Gui.CollapsibleObject
     public SkeletonStuff skeletonStuff = new SkeletonStuff();
 
     public static class SkeletonStuff{
-        public float goldLootSkeletonChance = 0.001f;
-        public int bonusLootMax = 10;
+
         public int minGoldBone = 1;
         public int maxGoldBone = 5;
 

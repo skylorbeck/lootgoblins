@@ -64,7 +64,7 @@ public class LootSkeletonEntity extends SkeletonEntity {
                 }
             }
 
-            int randomLoot = random.nextInt(Declarer.config.skeletonStuff.bonusLootMax)+3;
+            int randomLoot = random.nextInt(Declarer.config.bonusLootMax-2)+3;
             for (int i = 0; i < randomLoot; i++) {
                 Item lootItem = Registry.ITEM.get(Declarer.config.loot[random.nextInt(Declarer.config.loot.length)]);
                 ItemStack lootStack = new ItemStack(lootItem);
