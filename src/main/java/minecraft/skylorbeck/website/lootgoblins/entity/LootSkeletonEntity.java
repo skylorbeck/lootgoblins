@@ -42,7 +42,7 @@ public class LootSkeletonEntity extends SkeletonEntity {
     @Override
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
         if (causedByPlayer){
-            ItemStack lootStack = new ItemStack(Items.GOLD_INGOT);
+            ItemStack lootStack = new ItemStack(Items.GOLD_INGOT);//todo roll for loot table here
             ItemEntity itemEntity = new ItemEntity(this.world, this.getX(),this.getY()+1,this.getZ(),lootStack);
             this.world.spawnEntity(itemEntity);
         }

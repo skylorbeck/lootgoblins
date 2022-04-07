@@ -25,11 +25,6 @@ public class LootSkeletonEntityRenderer extends SkeletonEntityRenderer {
         super(context);
     }
 
-    public LootSkeletonEntityRenderer(EntityRendererFactory.Context ctx, EntityModelLayer layer, EntityModelLayer legArmorLayer, EntityModelLayer bodyArmorLayer) {
-        super(ctx, layer, legArmorLayer, bodyArmorLayer);
-//        this.addFeature(new StrayOverlayFeatureRenderer<AbstractSkeletonEntity, SkeletonEntityModel<AbstractSkeletonEntity>>(this, context.getModelLoader()));
-    }
-
     @Override
     public Identifier getTexture(AbstractSkeletonEntity abstractSkeletonEntity) {
         return TEXTURE;
