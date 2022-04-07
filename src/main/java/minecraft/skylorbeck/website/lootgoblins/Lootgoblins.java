@@ -16,11 +16,13 @@ import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import website.skylorbeck.minecraft.skylorlib.DynamicRecipeLoader;
 import website.skylorbeck.minecraft.skylorlib.Registrar;
 
 import static minecraft.skylorbeck.website.lootgoblins.Declarer.LOOT_SKELETON_GOLD;
+import static minecraft.skylorbeck.website.lootgoblins.Declarer.config;
 
 public class Lootgoblins implements ModInitializer {
     public static final String MOD_ID = "lootgoblins";
@@ -29,12 +31,15 @@ public class Lootgoblins implements ModInitializer {
         return new Identifier(MOD_ID, path);
     }
 
-    public static GoblinConfig config;
 
     @Override
     public void onInitialize() {
         ConfigHolder<GoblinConfig> configHolder = AutoConfig.register(GoblinConfig.class, GsonConfigSerializer::new);
         config = configHolder.getConfig();
+        configHolder.registerSaveListener((manager, data) ->{
+            config = data;
+            return ActionResult.SUCCESS;
+        });
 
         regItem("gold_bone_", Declarer.GOLD_BONE);
 
@@ -43,7 +48,7 @@ public class Lootgoblins implements ModInitializer {
         FabricDefaultAttributeRegistry.register(LOOT_SKELETON_GOLD, LootSkeletonEntity.createLootSkeletonAttributes());
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
-            if (!(entity instanceof LootSkeletonEntity) && entity instanceof SkeletonEntity skeletonEntity && world.random.nextFloat() < config.goldLootSkeletonChance) {//todo config setting here
+            if (!(entity instanceof LootSkeletonEntity) && entity instanceof SkeletonEntity skeletonEntity && world.random.nextFloat() < config.goldLootSkeletonChance) {
                 replaceEntity(skeletonEntity, LOOT_SKELETON_GOLD, world);
             }
         }));

@@ -17,6 +17,8 @@ import website.skylorbeck.minecraft.skylorlib.DynamicRecipeLoader;
 import static minecraft.skylorbeck.website.lootgoblins.Lootgoblins.getIdentifier;
 
 public class Declarer {
+    public static GoblinConfig config = new GoblinConfig();
+
     public static final EntityType<LootSkeletonEntity> LOOT_SKELETON_GOLD = Registry.register(Registry.ENTITY_TYPE,getIdentifier("gold_loot_skeleton"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.99f)).trackRangeBlocks(8).build());
 

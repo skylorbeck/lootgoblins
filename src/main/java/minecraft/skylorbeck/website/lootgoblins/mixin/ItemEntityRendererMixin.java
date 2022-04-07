@@ -1,5 +1,6 @@
 package minecraft.skylorbeck.website.lootgoblins.mixin;
 
+import minecraft.skylorbeck.website.lootgoblins.Declarer;
 import minecraft.skylorbeck.website.lootgoblins.Lootgoblins;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BeaconBlockEntityRenderer;
@@ -15,29 +16,40 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ItemEntityRendererMixin {
     @Inject(method = "render", at = @At("HEAD"))
     public void renderBeam(ItemEntity itemEntity, float yaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
-        float[] beamColor = Lootgoblins.BeamColors.WHITE.getColor();//todo config for enabling colors
-        switch (itemEntity.getStack().getRarity()){
-            case UNCOMMON -> beamColor = Lootgoblins.BeamColors.YELLOW.getColor();
-            case RARE -> beamColor = Lootgoblins.BeamColors.CYAN.getColor();
-            case EPIC -> beamColor = Lootgoblins.BeamColors.PURPLE.getColor();
+        float[] beamColor = Lootgoblins.BeamColors.WHITE.getColor();
+        boolean doBeam = Declarer.config.doLootBeamCommon;
+        switch (itemEntity.getStack().getRarity()) {
+            case UNCOMMON -> {
+                beamColor = Lootgoblins.BeamColors.YELLOW.getColor();
+                doBeam = Declarer.config.doLootBeamUncommon;
+            }
+            case RARE -> {
+                beamColor = Lootgoblins.BeamColors.CYAN.getColor();
+                doBeam = Declarer.config.doLootBeamRare;
+            }
+            case EPIC -> {
+                beamColor = Lootgoblins.BeamColors.PURPLE.getColor();
+                doBeam = Declarer.config.doLootBeamEpic;
+            }
         }
-
-        matrixStack.push();
-        matrixStack.translate(-0.5, 0,-0.5);
-        BeaconBlockEntityRenderer.renderBeam(
-                matrixStack,
-                vertexConsumerProvider,
-                Lootgoblins.getIdentifier("textures/beam.png"),
-                tickDelta,
-                1,
-                itemEntity.world.getTime(),
-                0,
-                4,//todo config for height
-                beamColor,
-                0.015f,//todo config for changing size
-                0.25f
-        );
-        matrixStack.pop();
+        if (doBeam && Declarer.config.doLootBeams) {
+            matrixStack.push();
+            matrixStack.translate(-0.5, 0, -0.5);
+            BeaconBlockEntityRenderer.renderBeam(
+                    matrixStack,
+                    vertexConsumerProvider,
+                    Lootgoblins.getIdentifier("textures/beam.png"),
+                    tickDelta,
+                    1,
+                    itemEntity.world.getTime(),
+                    0,
+                    Declarer.config.lootBeamHeight,
+                    beamColor,
+                    Declarer.config.lootBeamInner,
+                    Declarer.config.lootBeamOuter
+            );
+            matrixStack.pop();
+        }
     }
 
 
