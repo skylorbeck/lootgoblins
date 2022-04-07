@@ -1,17 +1,15 @@
 package minecraft.skylorbeck.website.lootgoblins.entity;
 
+import minecraft.skylorbeck.website.lootgoblins.Declarer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 public class LootSkeletonEntity extends SkeletonEntity {
@@ -42,7 +40,7 @@ public class LootSkeletonEntity extends SkeletonEntity {
     @Override
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
         if (causedByPlayer){
-            ItemStack lootStack = new ItemStack(Items.GOLD_INGOT);//todo roll for loot table here
+            ItemStack lootStack = new ItemStack(Declarer.GOLD_BONE);//todo roll for loot table here
             ItemEntity itemEntity = new ItemEntity(this.world, this.getX(),this.getY()+1,this.getZ(),lootStack);
             this.world.spawnEntity(itemEntity);
         }

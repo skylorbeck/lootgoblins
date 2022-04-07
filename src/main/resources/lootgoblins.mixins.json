@@ -4,7 +4,7 @@
   "package": "minecraft.skylorbeck.website.lootgoblins.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-
+    "RecipeManagerMixin"
   ],
   "client": [
     "ItemEntityRendererMixin"

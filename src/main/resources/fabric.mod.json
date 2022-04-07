@@ -19,7 +19,8 @@
     ],
     "main": [
       "minecraft.skylorbeck.website.lootgoblins.Lootgoblins"
-    ]
+    ],
+    "modmenu": ["minecraft.skylorbeck.website.lootgoblins.ModMenuIntegration"]
   },
   "mixins": [
     "lootgoblins.mixins.json"
@@ -27,6 +28,7 @@
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
-    "minecraft": "1.18.2"
+    "minecraft": "1.18.2",
+    "skylorlib": ">=1.2.3"
   }
 }
