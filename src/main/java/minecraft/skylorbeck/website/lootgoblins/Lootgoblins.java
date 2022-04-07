@@ -48,7 +48,7 @@ public class Lootgoblins implements ModInitializer {
         FabricDefaultAttributeRegistry.register(LOOT_SKELETON_GOLD, LootSkeletonEntity.createLootSkeletonAttributes());
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
-            if (!(entity instanceof LootSkeletonEntity) && entity instanceof SkeletonEntity skeletonEntity && world.random.nextFloat() < config.goldLootSkeletonChance) {
+            if (!(entity instanceof LootSkeletonEntity) && entity instanceof SkeletonEntity skeletonEntity && world.random.nextFloat() < config.skeletonStuff.goldLootSkeletonChance) {
                 replaceEntity(skeletonEntity, LOOT_SKELETON_GOLD, world);
             }
         }));

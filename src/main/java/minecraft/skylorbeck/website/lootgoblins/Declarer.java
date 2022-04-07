@@ -9,10 +9,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
-import website.skylorbeck.minecraft.skylorlib.DynamicRecipeLoader;
 
 import static minecraft.skylorbeck.website.lootgoblins.Lootgoblins.getIdentifier;
 
