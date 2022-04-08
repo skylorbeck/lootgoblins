@@ -4,6 +4,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import minecraft.skylorbeck.website.lootgoblins.entity.LootSkeletonEntity;
+import minecraft.skylorbeck.website.lootgoblins.tables.LootTables;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -18,6 +19,7 @@ import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import website.skylorbeck.minecraft.skylorlib.ConfigFileHandler;
 import website.skylorbeck.minecraft.skylorlib.DynamicRecipeLoader;
 import website.skylorbeck.minecraft.skylorlib.Registrar;
 
@@ -40,8 +42,11 @@ public class Lootgoblins implements ModInitializer {
             config = data;
             return ActionResult.SUCCESS;
         });
+        LootTables.generic = ConfigFileHandler.initConfigFile("lootgoblins/generic_table.json", LootTables.generic);
+        LootTables.musicDisks = ConfigFileHandler.initConfigFile("lootgoblins/music_table.json", LootTables.musicDisks);
+        LootTables.skeleton = ConfigFileHandler.initConfigFile("lootgoblins/skeleton_table.json", LootTables.skeleton);
 
-        regItem("gold_bone_", Declarer.GOLD_BONE);
+        regItem("gold_bone_", Declarer.GOLD_BONE);//todo make piglins like this
 
         Declarer.SMELT_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT,0.7f,200, DynamicRecipeLoader.furnaceTypes.smelting);
 
@@ -91,4 +96,6 @@ public class Lootgoblins implements ModInitializer {
             return this.color;
         }
     }
+
+
 }
