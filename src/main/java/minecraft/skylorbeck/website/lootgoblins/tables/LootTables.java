@@ -53,9 +53,6 @@ public class LootTables {
             Registry.ITEM.getId(Items.FISHING_ROD),
             Registry.ITEM.getId(Items.REDSTONE)
     };
-    public static Identifier[] skeleton = new Identifier[]{
-            Lootgoblins.getIdentifier("gold_bone_item")
-    };
 
     public static Identifier[] musicDisks = new Identifier[]{
             Registry.ITEM.getId(Items.MUSIC_DISC_13),
@@ -72,5 +69,13 @@ public class LootTables {
             Registry.ITEM.getId(Items.MUSIC_DISC_STRAD),
             Registry.ITEM.getId(Items.MUSIC_DISC_WAIT),
             Registry.ITEM.getId(Items.MUSIC_DISC_WARD)
+    };
+
+    public static Identifier[] skeleton = new Identifier[]{
+            Lootgoblins.getIdentifier("gold_bone_item")
+    };
+
+    public static Identifier[] endermen = new Identifier[]{
+            Lootgoblins.getIdentifier("prismarine_pearl_item")
     };
 }

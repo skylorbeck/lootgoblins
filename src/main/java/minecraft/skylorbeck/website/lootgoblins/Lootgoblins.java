@@ -3,6 +3,7 @@ package minecraft.skylorbeck.website.lootgoblins;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import minecraft.skylorbeck.website.lootgoblins.entity.LootEndermenEntity;
 import minecraft.skylorbeck.website.lootgoblins.entity.LootSkeletonEntity;
 import minecraft.skylorbeck.website.lootgoblins.tables.LootTables;
 import net.fabricmc.api.ModInitializer;
@@ -12,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.item.Item;
@@ -23,8 +25,7 @@ import website.skylorbeck.minecraft.skylorlib.ConfigFileHandler;
 import website.skylorbeck.minecraft.skylorlib.DynamicRecipeLoader;
 import website.skylorbeck.minecraft.skylorlib.Registrar;
 
-import static minecraft.skylorbeck.website.lootgoblins.Declarer.LOOT_SKELETON_GOLD;
-import static minecraft.skylorbeck.website.lootgoblins.Declarer.config;
+import static minecraft.skylorbeck.website.lootgoblins.Declarer.*;
 
 public class Lootgoblins implements ModInitializer {
     public static final String MOD_ID = "lootgoblins";
@@ -45,16 +46,22 @@ public class Lootgoblins implements ModInitializer {
         LootTables.generic = ConfigFileHandler.initConfigFile("lootgoblins/generic_table.json", LootTables.generic);
         LootTables.musicDisks = ConfigFileHandler.initConfigFile("lootgoblins/music_table.json", LootTables.musicDisks);
         LootTables.skeleton = ConfigFileHandler.initConfigFile("lootgoblins/skeleton_table.json", LootTables.skeleton);
+        LootTables.endermen = ConfigFileHandler.initConfigFile("lootgoblins/enderman_table.json", LootTables.endermen);
 
         regItem("gold_bone_", Declarer.GOLD_BONE);//todo make piglins like this
+        regItem("prismarine_pearl_", PRISMARINE_PEARL);
 
         Declarer.SMELT_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT,0.7f,200, DynamicRecipeLoader.furnaceTypes.smelting);
 
         FabricDefaultAttributeRegistry.register(LOOT_SKELETON_GOLD, LootSkeletonEntity.createLootSkeletonAttributes());
+        FabricDefaultAttributeRegistry.register(LOOT_ENDERMAN_PRISMARINE, LootEndermenEntity.createEndermanAttributes());
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
             if (!(entity instanceof LootSkeletonEntity) && entity instanceof SkeletonEntity skeletonEntity && world.random.nextFloat() < config.goblinChance) {
                 replaceEntity(skeletonEntity, LOOT_SKELETON_GOLD, world);
+            } else
+            if (!(entity instanceof LootEndermenEntity) && entity instanceof EndermanEntity endermanEntity && world.random.nextFloat() < config.goblinChance) {
+                replaceEntity(endermanEntity, LOOT_ENDERMAN_PRISMARINE, world);
             }
         }));
     }
@@ -96,6 +103,11 @@ public class Lootgoblins implements ModInitializer {
             return this.color;
         }
     }
-
-
 }
+//todo
+// Prismarine Enderman
+// Quartz Hoglin
+// Emerald Illager
+// Lapis Zombie
+// Redstone Creeper
+// Iron Spider
