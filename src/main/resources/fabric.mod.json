@@ -15,12 +15,14 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "minecraft.skylorbeck.website.lootgoblins.client.LootgoblinsClient"
+      "website.skylorbeck.minecraft.lootgoblins.client.LootgoblinsClient"
     ],
     "main": [
-      "minecraft.skylorbeck.website.lootgoblins.Lootgoblins"
+      "website.skylorbeck.minecraft.lootgoblins.Lootgoblins"
     ],
-    "modmenu": ["minecraft.skylorbeck.website.lootgoblins.ModMenuIntegration"]
+    "modmenu": [
+      "website.skylorbeck.minecraft.lootgoblins.ModMenuIntegration"
+    ]
   },
   "mixins": [
     "lootgoblins.mixins.json"

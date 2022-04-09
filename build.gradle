@@ -29,12 +29,12 @@ dependencies {
     modApi("com.terraformersmc:modmenu:${project.mod_menu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+    modRuntimeOnly("website.skylorbeck.sentimentality3:Sentimentality3:${project.sentimentality_version}")
+
     modRuntimeOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
 
-    modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${wthit_version}"
     modRuntimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
 
     modImplementation ("website.skylorbeck.minecraft:SkylorLib:$skylib_version")
