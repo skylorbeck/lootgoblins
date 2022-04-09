@@ -17,11 +17,6 @@ public class LootSkeletonEntity extends SkeletonEntity {
     }
 
     @Override
-    protected boolean isDisallowedInPeaceful() {
-        return false;
-    }
-
-    @Override
     protected boolean isAffectedByDaylight() {
         return false;
     }
@@ -44,7 +39,4 @@ public class LootSkeletonEntity extends SkeletonEntity {
         super.dropLoot(source, causedByPlayer);
     }
 
-    public static DefaultAttributeContainer.Builder createLootSkeletonAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3);
-    }
 }

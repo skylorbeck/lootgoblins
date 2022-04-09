@@ -1,6 +1,5 @@
 package minecraft.skylorbeck.website.lootgoblins.tables;
 
-import minecraft.skylorbeck.website.lootgoblins.Declarer;
 import minecraft.skylorbeck.website.lootgoblins.Lootgoblins;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -75,7 +74,27 @@ public class LootTables {
             Lootgoblins.getIdentifier("gold_bone_item")
     };
 
-    public static Identifier[] endermen = new Identifier[]{
+    public static Identifier[] enderman = new Identifier[]{
             Lootgoblins.getIdentifier("prismarine_pearl_item")
+    };
+
+    public static Identifier[] creeper = new Identifier[]{
+            Registry.ITEM.getId(Items.REDSTONE)//todo replace
+    };
+
+    public static Identifier[] hoglin = new Identifier[]{
+            Registry.ITEM.getId(Items.QUARTZ)//todo replace
+    };
+
+    public static Identifier[] illager = new Identifier[]{
+            Registry.ITEM.getId(Items.EMERALD)//todo replace
+    };
+
+    public static Identifier[] spider = new Identifier[]{
+            Registry.ITEM.getId(Items.IRON_INGOT)//todo replace
+    };
+
+    public static Identifier[] zombie = new Identifier[]{
+            Registry.ITEM.getId(Items.LAPIS_LAZULI)//todo replace
     };
 }

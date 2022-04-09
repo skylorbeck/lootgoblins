@@ -1,18 +1,17 @@
 package minecraft.skylorbeck.website.lootgoblins;
 
 import com.google.gson.JsonObject;
-import minecraft.skylorbeck.website.lootgoblins.entity.LootEndermenEntity;
-import minecraft.skylorbeck.website.lootgoblins.entity.LootSkeletonEntity;
+import minecraft.skylorbeck.website.lootgoblins.entity.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.*;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.EndermiteEntity;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -21,7 +20,6 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 import static minecraft.skylorbeck.website.lootgoblins.Lootgoblins.getIdentifier;
@@ -29,10 +27,20 @@ import static minecraft.skylorbeck.website.lootgoblins.Lootgoblins.getIdentifier
 public class Declarer {
     public static GoblinConfig config = new GoblinConfig();
 
-    public static final EntityType<LootSkeletonEntity> LOOT_SKELETON_GOLD = Registry.register(Registry.ENTITY_TYPE,getIdentifier("gold_loot_skeleton"),
+    public static final EntityType<LootSkeletonEntity> LOOT_SKELETON = Registry.register(Registry.ENTITY_TYPE,getIdentifier("golden_skeleton"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.99f)).trackRangeBlocks(8).build());
-    public static final EntityType<LootEndermenEntity> LOOT_ENDERMAN_PRISMARINE = Registry.register(Registry.ENTITY_TYPE,getIdentifier("prismarine_enderman"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootEndermenEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).trackRangeBlocks(8).build());
+    public static final EntityType<LootEndermanEntity> LOOT_ENDERMAN = Registry.register(Registry.ENTITY_TYPE,getIdentifier("prismarine_enderman"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootEndermanEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).trackRangeBlocks(8).build());
+    public static final EntityType<LootCreeperEntity> LOOT_CREEPER = Registry.register(Registry.ENTITY_TYPE,getIdentifier("redstone_creeper"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootCreeperEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.7f)).trackRangeBlocks(8).build());
+    public static final EntityType<LootHoglinEntity> LOOT_HOGLIN = Registry.register(Registry.ENTITY_TYPE,getIdentifier("quartz_hoglin"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootHoglinEntity::new).dimensions(EntityDimensions.fixed(1.3964844f, 1.4f)).trackRangeBlocks(8).build());
+    public static final EntityType<LootIllagerEntity> LOOT_ILLAGER = Registry.register(Registry.ENTITY_TYPE,getIdentifier("emerald_illager"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootIllagerEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeBlocks(8).build());
+    public static final EntityType<LootSpiderEntity> LOOT_SPIDER = Registry.register(Registry.ENTITY_TYPE,getIdentifier("iron_spider"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootSpiderEntity::new).dimensions(EntityDimensions.fixed(1.4f, 0.9f)).trackRangeBlocks(8).build());
+    public static final EntityType<LootZombieEntity> LOOT_ZOMBIE = Registry.register(Registry.ENTITY_TYPE,getIdentifier("lapis_zombie"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootZombieEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeBlocks(8).build());
 
     public static final Item GOLD_BONE = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static JsonObject SMELT_GOLD_BONE;
