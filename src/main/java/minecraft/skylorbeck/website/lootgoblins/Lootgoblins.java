@@ -51,7 +51,7 @@ public class Lootgoblins implements ModInitializer {
         LootTables.spider = ConfigFileHandler.initConfigFile("lootgoblins/enderman_table.json", LootTables.spider);
         LootTables.zombie = ConfigFileHandler.initConfigFile("lootgoblins/zombie_table.json", LootTables.zombie);
 
-        regItem("gold_bone_", Declarer.GOLD_BONE);//todo make piglins like this
+        regItem("gold_bone_", Declarer.GOLD_BONE);
         regItem("prismarine_pearl_", PRISMARINE_PEARL);
 
         Declarer.SMELT_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT,0.7f,200, DynamicRecipeLoader.furnaceTypes.smelting);
