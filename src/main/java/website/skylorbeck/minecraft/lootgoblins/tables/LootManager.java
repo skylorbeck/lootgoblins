@@ -1,5 +1,7 @@
 package website.skylorbeck.minecraft.lootgoblins.tables;
 
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -73,7 +75,9 @@ public class LootManager {
 
     public static void emitParticle(LivingEntity entity) {
         if (entity.world.isClient) {
-            entity.world.addParticle(ParticleTypes.ELECTRIC_SPARK, entity.getParticleX(0.5), entity.getRandomBodyY() - 0.25, entity.getParticleZ(0.5), (entity.world.random.nextDouble()*0.5 - 0.25), entity.world.random.nextDouble()*0.5-0.25, (entity.world.random.nextDouble()*0.5 - 0.25));
+            for (int i = 0; i < Declarer.config.particleCount ; i++) {
+                entity.world.addParticle(ParticleTypes.ELECTRIC_SPARK, entity.getParticleX(0.5), entity.getRandomBodyY() - 0.25, entity.getParticleZ(0.5), (entity.world.random.nextDouble()*0.5 - 0.25), entity.world.random.nextDouble()*0.5-0.25, (entity.world.random.nextDouble()*0.5 - 0.25));
+            }
         }
     }
 }

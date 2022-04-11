@@ -18,6 +18,9 @@ import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
+import software.bernie.geckolib3.GeckoLib;
 import website.skylorbeck.minecraft.lootgoblins.entity.*;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootTables;
 import website.skylorbeck.minecraft.skylorlib.ConfigFileHandler;
@@ -37,6 +40,8 @@ public class Lootgoblins implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        GeckoLib.initialize();
+
         ConfigHolder<GoblinConfig> configHolder = AutoConfig.register(GoblinConfig.class, GsonConfigSerializer::new);
         Declarer.config = configHolder.getConfig();
         configHolder.registerSaveListener((manager, data) ->{
@@ -203,6 +208,7 @@ public class Lootgoblins implements ModInitializer {
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_ILLAGER, LootIllagerEntity.createPillagerAttributes());
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_SPIDER, LootSpiderEntity.createSpiderAttributes());
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_ZOMBIE, LootZombieEntity.createZombieAttributes());
+        FabricDefaultAttributeRegistry.register(Declarer.LOOT_GOBLIN, LootGoblinEntity.createMobAttributes());
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
             if (world.random.nextFloat() < Declarer.config.goblinChance){
@@ -227,6 +233,10 @@ public class Lootgoblins implements ModInitializer {
                 if (!(entity instanceof LootEndermanEntity) && entity instanceof EndermanEntity endermanEntity) {
                     replaceEntity(endermanEntity, Declarer.LOOT_ENDERMAN, world);
                 }
+                else if (entity instanceof LivingEntity){
+                   LootGoblinEntity lootGoblin = (LootGoblinEntity) replaceEntity((LivingEntity) entity,Declarer.LOOT_GOBLIN,world);
+                   lootGoblin.setVariant(world.random.nextInt(4));
+                }
             }
         }));
     }
@@ -239,7 +249,7 @@ public class Lootgoblins implements ModInitializer {
         Registrar.regBlock(name, block, MOD_ID);
     }
 
-    private void replaceEntity(LivingEntity source, EntityType<?> target, ServerWorld world) {
+    private LivingEntity replaceEntity(LivingEntity source, EntityType<?> target, ServerWorld world) {
         LivingEntity lootGoblin = (LivingEntity) target.create(world);
         lootGoblin.copyPositionAndRotation(source);
         for (EquipmentSlot slot : EquipmentSlot.values()) {
@@ -247,6 +257,7 @@ public class Lootgoblins implements ModInitializer {
         }
         world.spawnEntity(lootGoblin);
         source.remove(Entity.RemovalReason.DISCARDED);
+        return lootGoblin;
     }
 
     public enum BeamColors {
@@ -269,5 +280,4 @@ public class Lootgoblins implements ModInitializer {
         }
     }
 }
-
-//todo actual goblin?
+//todo lang file

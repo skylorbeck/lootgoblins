@@ -23,5 +23,6 @@ public class LootgoblinsClient implements ClientModInitializer {
         EntityRendererRegistry.register(LOOT_ILLAGER, LootIllagerEntityRenderer::new);
         EntityRendererRegistry.register(LOOT_SPIDER, LootSpiderEntityRenderer::new);
         EntityRendererRegistry.register(LOOT_ZOMBIE, LootZombieEntityRenderer::new);
+        EntityRendererRegistry.register(LOOT_GOBLIN, LootGoblinEntityRenderer::new);
     }
 }

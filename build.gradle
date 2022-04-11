@@ -37,7 +37,8 @@ dependencies {
 
     modRuntimeOnly "mcp.mobius.waila:wthit:fabric-${wthit_version}"
 
-    modImplementation ("website.skylorbeck.minecraft:SkylorLib:$skylib_version")
+    modImplementation ("website.skylorbeck.minecraft:SkylorLib:${skylib_version}")
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.18:${geckolib_version}"
 }
 
 processResources {

@@ -41,6 +41,9 @@ public class Declarer {
     public static final EntityType<LootZombieEntity> LOOT_ZOMBIE = Registry.register(Registry.ENTITY_TYPE,getIdentifier("lapis_zombie"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootZombieEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeChunks(8).build());
 
+    public static final EntityType<LootGoblinEntity> LOOT_GOBLIN = Registry.register(Registry.ENTITY_TYPE,getIdentifier("loot_goblin"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LootGoblinEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1f)).trackRangeChunks(8).build());
+
     public static final Item GOLD_BONE = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static JsonObject SMELT_GOLD_BONE;
     public static final Item PRISMARINE_PEARL = new EnderPearlItem(new FabricItemSettings().rarity(Rarity.RARE)){

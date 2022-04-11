@@ -122,6 +122,7 @@ public class LootTables {
             Registry.ITEM.getId(Items.GLOW_BERRIES),
             Registry.ITEM.getId(Items.ITEM_FRAME),
             Registry.ITEM.getId(Items.GLOW_ITEM_FRAME),
+            Registry.ITEM.getId(Items.GUNPOWDER),
             Registry.ITEM.getId(Items.REDSTONE)
     };
     
@@ -178,30 +179,38 @@ public class LootTables {
     };
 
     public static Identifier[] skeleton = new Identifier[]{
-            Lootgoblins.getIdentifier("gold_bone_item")
+            Lootgoblins.getIdentifier("gold_bone_item"),
+            Registry.ITEM.getId(Items.BONE),
     };
 
     public static Identifier[] enderman = new Identifier[]{
-            Lootgoblins.getIdentifier("prismarine_pearl_item")
+            Lootgoblins.getIdentifier("prismarine_pearl_item"),
+            Registry.ITEM.getId(Items.ENDER_PEARL),
     };
 
     public static Identifier[] creeper = new Identifier[]{
-            Registry.ITEM.getId(Items.REDSTONE)//todo replace
+            Registry.ITEM.getId(Items.REDSTONE),//todo replace
+            Registry.ITEM.getId(Items.GUNPOWDER),
+
     };
 
     public static Identifier[] hoglin = new Identifier[]{
-            Registry.ITEM.getId(Items.QUARTZ)//todo replace
+            Registry.ITEM.getId(Items.QUARTZ),//todo replace
+            Registry.ITEM.getId(Items.PORKCHOP),
     };
 
     public static Identifier[] illager = new Identifier[]{
-            Registry.ITEM.getId(Items.EMERALD)//todo replace
+            Registry.ITEM.getId(Items.EMERALD),//todo replace
+            Registry.ITEM.getId(Items.CROSSBOW),
     };
 
     public static Identifier[] spider = new Identifier[]{
-            Registry.ITEM.getId(Items.IRON_INGOT)//todo replace
+            Registry.ITEM.getId(Items.IRON_INGOT),//todo replace
+            Registry.ITEM.getId(Items.SPIDER_EYE),
     };
 
     public static Identifier[] zombie = new Identifier[]{
-            Registry.ITEM.getId(Items.LAPIS_LAZULI)//todo replace
+            Registry.ITEM.getId(Items.LAPIS_LAZULI),//todo replace
+            Registry.ITEM.getId(Items.ROTTEN_FLESH),
     };
 }

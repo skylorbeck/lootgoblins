@@ -22,4 +22,5 @@ public class GoblinConfig implements ConfigData {
     public float goblinChance = 0.001f;
     public int bonusLootMax = 10;
     public int maxSpecificLoot = 5;
+    public int particleCount = 2;
 }
