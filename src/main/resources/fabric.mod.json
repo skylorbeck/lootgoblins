@@ -3,13 +3,20 @@
   "id": "lootgoblins",
   "version": "${version}",
   "name": "Lootgoblins",
-  "description": "Adds special skeletons that drop loot!",
+  "description": "Adds little Goblins that drop piles of loot!",
   "authors": [
-    "SkylorBeck"
+    "Skylor Beck",
+    "Patrons:",
+    "Striker99974",
+    "TheNoobGamer07",
+    "Scar13t",
+    "Kynan",
+    "Bradley Chauvin"
   ],
-  "contact": {
-    "website": "skylorbeck.website"
-  },
+  "homepage": "https://www.skylorbeck.website",
+  "source": "https://github.com/Skylortrexler/lootgoblins",
+  "repo": "https://github.com/Skylortrexler/lootgoblins",
+  "issues": "https://github.com/Skylortrexler/lootgoblins/issues",
   "license": "LGPL-3.0",
   "icon": "assets/lootgoblins/icon.png",
   "environment": "*",

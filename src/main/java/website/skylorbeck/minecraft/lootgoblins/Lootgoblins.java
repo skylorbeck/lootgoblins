@@ -424,8 +424,6 @@ public class Lootgoblins implements ModInitializer {
         }
     }
 }
-//todo lang file
-
 //known issues
 //goblins replace entity on save-load, unfixable
 //todo emerald crossbow reloads weird
