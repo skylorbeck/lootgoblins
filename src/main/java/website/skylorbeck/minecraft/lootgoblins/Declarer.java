@@ -111,7 +111,7 @@ public class Declarer {
     };
     public static final Item IRON_EYE = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
     public static final Item STONEFLESH = new Item(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON));
-    public static final Item PRISMARINE_PEARL = new EnderPearlItem(new FabricItemSettings().rarity(Rarity.RARE)){
+    public static final Item PRISMARINE_PEARL = new EnderPearlItem(new FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)){
         @Override
         public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
             ItemStack itemStack = user.getStackInHand(hand);

@@ -33,8 +33,8 @@ public class LootManager {
             world.spawnEntity(itemEntity);
         }
         //enchanted books
-        if (random.nextFloat() < Declarer.config.enchantedBookChance) {
-            for (int i = 0; i < random.nextInt(Declarer.config.bonusEnchantedBooksMax + 1) + 1; i++) {
+        for (int i = 0; i < Declarer.config.bonusEnchantedBooksMax; i++) {
+            if (random.nextFloat() < Declarer.config.enchantedBookChance) {
                 ItemStack lootStack = EnchantmentHelper.enchant(random, Items.BOOK.getDefaultStack(), random.nextInt(30), random.nextBoolean());
                 ItemEntity itemEntity = new ItemEntity(world, mob.getX(), mob.getY() + 1, mob.getZ(), lootStack);
                 itemEntity.addVelocity(0, random.nextFloat() / 2f, 0);
@@ -49,7 +49,7 @@ public class LootManager {
             world.spawnEntity(itemEntity);
         }
         //combat
-        for (int i = 0; i <Declarer.config.bonusCombatLootMax ; i++) {
+        for (int i = 0; i < Declarer.config.bonusCombatLootMax; i++) {
             if (random.nextFloat() < Declarer.config.bonusCombatLootChance) {
                 Item lootItem = Registry.ITEM.get(LootTables.combat[random.nextInt(LootTables.combat.length)]);
                 enchantAndSpawn(mob, world, random, lootItem);
@@ -75,8 +75,8 @@ public class LootManager {
 
     public static void emitParticle(LivingEntity entity) {
         if (entity.world.isClient) {
-            for (int i = 0; i < Declarer.config.particleCount ; i++) {
-                entity.world.addParticle(ParticleTypes.ELECTRIC_SPARK, entity.getParticleX(0.5), entity.getRandomBodyY() - 0.25, entity.getParticleZ(0.5), (entity.world.random.nextDouble()*0.5 - 0.25), entity.world.random.nextDouble()*0.5-0.25, (entity.world.random.nextDouble()*0.5 - 0.25));
+            for (int i = 0; i < Declarer.config.particleCount; i++) {
+                entity.world.addParticle(ParticleTypes.ELECTRIC_SPARK, entity.getParticleX(0.5), entity.getRandomBodyY() - 0.25, entity.getParticleZ(0.5), (entity.world.random.nextDouble() * 0.5 - 0.25), entity.world.random.nextDouble() * 0.5 - 0.25, (entity.world.random.nextDouble() * 0.5 - 0.25));
             }
         }
     }

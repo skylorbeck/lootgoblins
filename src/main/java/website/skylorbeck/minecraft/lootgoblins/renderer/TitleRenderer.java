@@ -8,6 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Matrix4f;
+import website.skylorbeck.minecraft.lootgoblins.Declarer;
 
 public class TitleRenderer {
     public static void renderLabelIfPresent(LivingEntity entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, EntityRenderDispatcher dispatcher, TextRenderer textRenderer) {
@@ -27,8 +28,9 @@ public class TitleRenderer {
         float width = -textRenderer.getWidth(name[0]) / 2;
         textRenderer.draw(Text.of(name[0]), width, 0, 0x20FFFFFF, false, matrix4f, vertexConsumers, true, j, light);
         textRenderer.draw(Text.of(name[0]), width, 0, -1, false, matrix4f, vertexConsumers, false, 0, light);
-        matrices.translate(0,10,0);
-        matrices.scale(0.5f,0.5f,0.5f);
+        matrices.translate(0, Declarer.config.titleAbove?Declarer.config.titleSmall?-6:-8:10,0);
+        float size = Declarer.config.titleSmall?0.5f:0.75f;
+        matrices.scale(size,size,size);
         matrix4f = matrices.peek().getPositionMatrix();
         StringBuilder nameAppend = new StringBuilder();
         for (int i = 1; i < name.length; i++) {
