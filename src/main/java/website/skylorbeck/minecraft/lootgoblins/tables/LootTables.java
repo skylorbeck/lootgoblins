@@ -182,37 +182,30 @@ public class LootTables {
 
     public static Identifier[] skeleton = new Identifier[]{
             Lootgoblins.getIdentifier("gold_bone_item"),
-            Registry.ITEM.getId(Items.BONE),
     };
 
     public static Identifier[] enderman = new Identifier[]{
             Lootgoblins.getIdentifier("prismarine_pearl_item"),
-            Registry.ITEM.getId(Items.ENDER_PEARL),
     };
 
     public static Identifier[] creeper = new Identifier[]{
             Lootgoblins.getIdentifier("red_bomb_item"),
-            Registry.ITEM.getId(Items.GUNPOWDER),
     };
 
     public static Identifier[] hoglin = new Identifier[]{
             Lootgoblins.getIdentifier("quartzchop_item"),
-            Registry.ITEM.getId(Items.PORKCHOP),
     };
 
     public static Identifier[] illager = new Identifier[]{
             Lootgoblins.getIdentifier("emerald_crossbow_item"),
-            Registry.ITEM.getId(Items.CROSSBOW),
     };
 
     public static Identifier[] spider = new Identifier[]{
             Lootgoblins.getIdentifier("iron_eye_item"),
-            Registry.ITEM.getId(Items.SPIDER_EYE),
     };
 
     public static Identifier[] zombie = new Identifier[]{
             Lootgoblins.getIdentifier("stoneflesh_item"),
-            Registry.ITEM.getId(Items.ROTTEN_FLESH),
     };
 
     public static Identifier[] loot_goblin = new Identifier[]{

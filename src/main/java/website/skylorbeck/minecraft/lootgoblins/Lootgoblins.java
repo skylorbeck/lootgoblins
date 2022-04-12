@@ -14,10 +14,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -46,124 +48,124 @@ public class Lootgoblins implements ModInitializer {
 
         ConfigHolder<GoblinConfig> configHolder = AutoConfig.register(GoblinConfig.class, GsonConfigSerializer::new);
         Declarer.config = configHolder.getConfig();
-        configHolder.registerSaveListener((manager, data) ->{
+        configHolder.registerSaveListener((manager, data) -> {
             Declarer.config = data;
             return ActionResult.SUCCESS;
         });
-        if (FabricLoader.getInstance().isModLoaded("sentimentality3")){
+        if (FabricLoader.getInstance().isModLoaded("sentimentality3")) {
             ArrayList<Identifier> sids = new ArrayList<>(Arrays.stream(LootTables.generic).toList());
-            sids.add(new Identifier("sentimentality3","monuple_compressed_cobbled_deepslate"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_gravel"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_netherrack"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_granite"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_andesite"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_dirt"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_diorite"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_sand"));
-            sids.add(new Identifier("sentimentality3","monuple_compressed_cobblestone"));
-            sids.add(new Identifier("sentimentality3","double_compressed_cobbled_deepslate"));
-            sids.add(new Identifier("sentimentality3","double_compressed_gravel"));
-            sids.add(new Identifier("sentimentality3","double_compressed_netherrack"));
-            sids.add(new Identifier("sentimentality3","double_compressed_granite"));
-            sids.add(new Identifier("sentimentality3","double_compressed_andesite"));
-            sids.add(new Identifier("sentimentality3","double_compressed_dirt"));
-            sids.add(new Identifier("sentimentality3","double_compressed_diorite"));
-            sids.add(new Identifier("sentimentality3","double_compressed_sand"));
-            sids.add(new Identifier("sentimentality3","double_compressed_cobblestone"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_cobbled_deepslate"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_gravel"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_netherrack"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_granite"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_andesite"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_dirt"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_diorite"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_sand"));
+            sids.add(new Identifier("sentimentality3", "monuple_compressed_cobblestone"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_cobbled_deepslate"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_gravel"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_netherrack"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_granite"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_andesite"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_dirt"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_diorite"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_sand"));
+            sids.add(new Identifier("sentimentality3", "double_compressed_cobblestone"));
             LootTables.generic = sids.toArray(new Identifier[0]);
             sids = new ArrayList<>(Arrays.stream(LootTables.combat).toList());
-            sids.add(new Identifier("sentimentality3","diorite_axe"));
-            sids.add(new Identifier("sentimentality3","diorite_shovel"));
-            sids.add(new Identifier("sentimentality3","diorite_sword"));
-            sids.add(new Identifier("sentimentality3","diorite_pick"));
-            sids.add(new Identifier("sentimentality3","andesite_axe"));
-            sids.add(new Identifier("sentimentality3","andesite_shovel"));
-            sids.add(new Identifier("sentimentality3","andesite_sword"));
-            sids.add(new Identifier("sentimentality3","andesite_pick"));
-            sids.add(new Identifier("sentimentality3","amethyst_axe"));
-            sids.add(new Identifier("sentimentality3","amethyst_shovel"));
-            sids.add(new Identifier("sentimentality3","amethyst_sword"));
-            sids.add(new Identifier("sentimentality3","amethyst_pick"));
-            sids.add(new Identifier("sentimentality3","granite_axe"));
-            sids.add(new Identifier("sentimentality3","granite_shovel"));
-            sids.add(new Identifier("sentimentality3","granite_sword"));
-            sids.add(new Identifier("sentimentality3","granite_pick"));
-            sids.add(new Identifier("sentimentality3","copper_axe"));
-            sids.add(new Identifier("sentimentality3","copper_shovel"));
-            sids.add(new Identifier("sentimentality3","copper_sword"));
-            sids.add(new Identifier("sentimentality3","copper_pick"));
-            sids.add(new Identifier("sentimentality3","quartz_axe"));
-            sids.add(new Identifier("sentimentality3","quartz_shovel"));
-            sids.add(new Identifier("sentimentality3","quartz_sword"));
-            sids.add(new Identifier("sentimentality3","quartz_pick"));
-            sids.add(new Identifier("sentimentality3","emerald_axe"));
-            sids.add(new Identifier("sentimentality3","emerald_shovel"));
-            sids.add(new Identifier("sentimentality3","emerald_sword"));
-            sids.add(new Identifier("sentimentality3","emerald_pick"));
-            sids.add(new Identifier("sentimentality3","lapis_axe"));
-            sids.add(new Identifier("sentimentality3","lapis_shovel"));
-            sids.add(new Identifier("sentimentality3","lapis_sword"));
-            sids.add(new Identifier("sentimentality3","lapis_pick"));
-            sids.add(new Identifier("sentimentality3","redstone_axe"));
-            sids.add(new Identifier("sentimentality3","redstone_shovel"));
-            sids.add(new Identifier("sentimentality3","redstone_sword"));
-            sids.add(new Identifier("sentimentality3","redstone_pick"));
-            sids.add(new Identifier("sentimentality3","netherrack_axe"));
-            sids.add(new Identifier("sentimentality3","netherrack_shovel"));
-            sids.add(new Identifier("sentimentality3","netherrack_sword"));
-            sids.add(new Identifier("sentimentality3","netherrack_pick"));
-            sids.add(new Identifier("sentimentality3","netherbrick_axe"));
-            sids.add(new Identifier("sentimentality3","netherbrick_shovel"));
-            sids.add(new Identifier("sentimentality3","netherbrick_sword"));
-            sids.add(new Identifier("sentimentality3","netherbrick_pick"));
-            sids.add(new Identifier("sentimentality3","rednetherbrick_axe"));
-            sids.add(new Identifier("sentimentality3","rednetherbrick_shovel"));
-            sids.add(new Identifier("sentimentality3","rednetherbrick_sword"));
-            sids.add(new Identifier("sentimentality3","rednetherbrick_pick"));
-            sids.add(new Identifier("sentimentality3","sandstone_axe"));
-            sids.add(new Identifier("sentimentality3","sandstone_shovel"));
-            sids.add(new Identifier("sentimentality3","sandstone_sword"));
-            sids.add(new Identifier("sentimentality3","sandstone_pick"));
-            sids.add(new Identifier("sentimentality3","redsandstone_axe"));
-            sids.add(new Identifier("sentimentality3","redsandstone_shovel"));
-            sids.add(new Identifier("sentimentality3","redsandstone_sword"));
-            sids.add(new Identifier("sentimentality3","redsandstone_pick"));
-            sids.add(new Identifier("sentimentality3","flint_axe"));
-            sids.add(new Identifier("sentimentality3","flint_shovel"));
-            sids.add(new Identifier("sentimentality3","flint_sword"));
-            sids.add(new Identifier("sentimentality3","flint_pick"));
-            sids.add(new Identifier("sentimentality3","blackstone_axe"));
-            sids.add(new Identifier("sentimentality3","blackstone_shovel"));
-            sids.add(new Identifier("sentimentality3","blackstone_sword"));
-            sids.add(new Identifier("sentimentality3","blackstone_pick"));
-            sids.add(new Identifier("sentimentality3","basalt_axe"));
-            sids.add(new Identifier("sentimentality3","basalt_shovel"));
-            sids.add(new Identifier("sentimentality3","basalt_sword"));
-            sids.add(new Identifier("sentimentality3","basalt_pick"));
-            sids.add(new Identifier("sentimentality3","endstone_axe"));
-            sids.add(new Identifier("sentimentality3","endstone_shovel"));
-            sids.add(new Identifier("sentimentality3","endstone_sword"));
-            sids.add(new Identifier("sentimentality3","endstone_pick"));
-            sids.add(new Identifier("sentimentality3","warped_axe"));
-            sids.add(new Identifier("sentimentality3","warped_shovel"));
-            sids.add(new Identifier("sentimentality3","warped_sword"));
-            sids.add(new Identifier("sentimentality3","warped_pick"));
-            sids.add(new Identifier("sentimentality3","crimson_axe"));
-            sids.add(new Identifier("sentimentality3","crimson_shovel"));
-            sids.add(new Identifier("sentimentality3","crimson_sword"));
-            sids.add(new Identifier("sentimentality3","crimson_pick"));
-            sids.add(new Identifier("sentimentality3","deepslate_axe"));
-            sids.add(new Identifier("sentimentality3","deepslate_shovel"));
-            sids.add(new Identifier("sentimentality3","deepslate_sword"));
-            sids.add(new Identifier("sentimentality3","deepslate_pick"));
-            sids.add(new Identifier("sentimentality3","copper_helmet"));
-            sids.add(new Identifier("sentimentality3","copper_chestplate"));
-            sids.add(new Identifier("sentimentality3","copper_leggings"));
-            sids.add(new Identifier("sentimentality3","copper_boots"));
-            sids.add(new Identifier("sentimentality3","wool_helmet"));
-            sids.add(new Identifier("sentimentality3","wool_chestplate"));
-            sids.add(new Identifier("sentimentality3","wool_leggings"));
-            sids.add(new Identifier("sentimentality3","wool_boots"));
+            sids.add(new Identifier("sentimentality3", "diorite_axe"));
+            sids.add(new Identifier("sentimentality3", "diorite_shovel"));
+            sids.add(new Identifier("sentimentality3", "diorite_sword"));
+            sids.add(new Identifier("sentimentality3", "diorite_pick"));
+            sids.add(new Identifier("sentimentality3", "andesite_axe"));
+            sids.add(new Identifier("sentimentality3", "andesite_shovel"));
+            sids.add(new Identifier("sentimentality3", "andesite_sword"));
+            sids.add(new Identifier("sentimentality3", "andesite_pick"));
+            sids.add(new Identifier("sentimentality3", "amethyst_axe"));
+            sids.add(new Identifier("sentimentality3", "amethyst_shovel"));
+            sids.add(new Identifier("sentimentality3", "amethyst_sword"));
+            sids.add(new Identifier("sentimentality3", "amethyst_pick"));
+            sids.add(new Identifier("sentimentality3", "granite_axe"));
+            sids.add(new Identifier("sentimentality3", "granite_shovel"));
+            sids.add(new Identifier("sentimentality3", "granite_sword"));
+            sids.add(new Identifier("sentimentality3", "granite_pick"));
+            sids.add(new Identifier("sentimentality3", "copper_axe"));
+            sids.add(new Identifier("sentimentality3", "copper_shovel"));
+            sids.add(new Identifier("sentimentality3", "copper_sword"));
+            sids.add(new Identifier("sentimentality3", "copper_pick"));
+            sids.add(new Identifier("sentimentality3", "quartz_axe"));
+            sids.add(new Identifier("sentimentality3", "quartz_shovel"));
+            sids.add(new Identifier("sentimentality3", "quartz_sword"));
+            sids.add(new Identifier("sentimentality3", "quartz_pick"));
+            sids.add(new Identifier("sentimentality3", "emerald_axe"));
+            sids.add(new Identifier("sentimentality3", "emerald_shovel"));
+            sids.add(new Identifier("sentimentality3", "emerald_sword"));
+            sids.add(new Identifier("sentimentality3", "emerald_pick"));
+            sids.add(new Identifier("sentimentality3", "lapis_axe"));
+            sids.add(new Identifier("sentimentality3", "lapis_shovel"));
+            sids.add(new Identifier("sentimentality3", "lapis_sword"));
+            sids.add(new Identifier("sentimentality3", "lapis_pick"));
+            sids.add(new Identifier("sentimentality3", "redstone_axe"));
+            sids.add(new Identifier("sentimentality3", "redstone_shovel"));
+            sids.add(new Identifier("sentimentality3", "redstone_sword"));
+            sids.add(new Identifier("sentimentality3", "redstone_pick"));
+            sids.add(new Identifier("sentimentality3", "netherrack_axe"));
+            sids.add(new Identifier("sentimentality3", "netherrack_shovel"));
+            sids.add(new Identifier("sentimentality3", "netherrack_sword"));
+            sids.add(new Identifier("sentimentality3", "netherrack_pick"));
+            sids.add(new Identifier("sentimentality3", "netherbrick_axe"));
+            sids.add(new Identifier("sentimentality3", "netherbrick_shovel"));
+            sids.add(new Identifier("sentimentality3", "netherbrick_sword"));
+            sids.add(new Identifier("sentimentality3", "netherbrick_pick"));
+            sids.add(new Identifier("sentimentality3", "rednetherbrick_axe"));
+            sids.add(new Identifier("sentimentality3", "rednetherbrick_shovel"));
+            sids.add(new Identifier("sentimentality3", "rednetherbrick_sword"));
+            sids.add(new Identifier("sentimentality3", "rednetherbrick_pick"));
+            sids.add(new Identifier("sentimentality3", "sandstone_axe"));
+            sids.add(new Identifier("sentimentality3", "sandstone_shovel"));
+            sids.add(new Identifier("sentimentality3", "sandstone_sword"));
+            sids.add(new Identifier("sentimentality3", "sandstone_pick"));
+            sids.add(new Identifier("sentimentality3", "redsandstone_axe"));
+            sids.add(new Identifier("sentimentality3", "redsandstone_shovel"));
+            sids.add(new Identifier("sentimentality3", "redsandstone_sword"));
+            sids.add(new Identifier("sentimentality3", "redsandstone_pick"));
+            sids.add(new Identifier("sentimentality3", "flint_axe"));
+            sids.add(new Identifier("sentimentality3", "flint_shovel"));
+            sids.add(new Identifier("sentimentality3", "flint_sword"));
+            sids.add(new Identifier("sentimentality3", "flint_pick"));
+            sids.add(new Identifier("sentimentality3", "blackstone_axe"));
+            sids.add(new Identifier("sentimentality3", "blackstone_shovel"));
+            sids.add(new Identifier("sentimentality3", "blackstone_sword"));
+            sids.add(new Identifier("sentimentality3", "blackstone_pick"));
+            sids.add(new Identifier("sentimentality3", "basalt_axe"));
+            sids.add(new Identifier("sentimentality3", "basalt_shovel"));
+            sids.add(new Identifier("sentimentality3", "basalt_sword"));
+            sids.add(new Identifier("sentimentality3", "basalt_pick"));
+            sids.add(new Identifier("sentimentality3", "endstone_axe"));
+            sids.add(new Identifier("sentimentality3", "endstone_shovel"));
+            sids.add(new Identifier("sentimentality3", "endstone_sword"));
+            sids.add(new Identifier("sentimentality3", "endstone_pick"));
+            sids.add(new Identifier("sentimentality3", "warped_axe"));
+            sids.add(new Identifier("sentimentality3", "warped_shovel"));
+            sids.add(new Identifier("sentimentality3", "warped_sword"));
+            sids.add(new Identifier("sentimentality3", "warped_pick"));
+            sids.add(new Identifier("sentimentality3", "crimson_axe"));
+            sids.add(new Identifier("sentimentality3", "crimson_shovel"));
+            sids.add(new Identifier("sentimentality3", "crimson_sword"));
+            sids.add(new Identifier("sentimentality3", "crimson_pick"));
+            sids.add(new Identifier("sentimentality3", "deepslate_axe"));
+            sids.add(new Identifier("sentimentality3", "deepslate_shovel"));
+            sids.add(new Identifier("sentimentality3", "deepslate_sword"));
+            sids.add(new Identifier("sentimentality3", "deepslate_pick"));
+            sids.add(new Identifier("sentimentality3", "copper_helmet"));
+            sids.add(new Identifier("sentimentality3", "copper_chestplate"));
+            sids.add(new Identifier("sentimentality3", "copper_leggings"));
+            sids.add(new Identifier("sentimentality3", "copper_boots"));
+            sids.add(new Identifier("sentimentality3", "wool_helmet"));
+            sids.add(new Identifier("sentimentality3", "wool_chestplate"));
+            sids.add(new Identifier("sentimentality3", "wool_leggings"));
+            sids.add(new Identifier("sentimentality3", "wool_boots"));
             LootTables.combat = sids.toArray(new Identifier[0]);
         }
         LootTables.generic = ConfigFileHandler.initConfigFile("lootgoblins/generic_table.json", LootTables.generic);
@@ -188,16 +190,16 @@ public class Lootgoblins implements ModInitializer {
         regItem("red_bomb_", Declarer.RED_BOMB);
         regItem("stoneflesh_", Declarer.STONEFLESH);
 
-        Declarer.SMELT_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
-        Declarer.SMELT_IRON_EYE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.IRON_EYE, Items.IRON_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
-        Declarer.SMELT_QUARTZCHOP = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.QUARTZCHOP, Items.QUARTZ,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
-        Declarer.SMELT_EMERALD_CROSSBOW = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.EMERALD_CROSSBOW, Items.EMERALD,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
-        Declarer.SMELT_STONEFLESH = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.STONEFLESH, Items.LAPIS_LAZULI,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
-        Declarer.BLAST_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
-        Declarer.BLAST_IRON_EYE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.IRON_EYE, Items.IRON_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
-        Declarer.BLAST_QUARTZCHOP = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.QUARTZCHOP, Items.QUARTZ,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
-        Declarer.BLAST_EMERALD_CROSSBOW = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.EMERALD_CROSSBOW, Items.EMERALD,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
-        Declarer.BLAST_STONEFLESH = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.STONEFLESH, Items.LAPIS_LAZULI,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.SMELT_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT, 1, 200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_IRON_EYE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.IRON_EYE, Items.IRON_INGOT, 1, 200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_QUARTZCHOP = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.QUARTZCHOP, Items.QUARTZ, 1, 200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_EMERALD_CROSSBOW = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.EMERALD_CROSSBOW, Items.EMERALD, 1, 200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_STONEFLESH = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.STONEFLESH, Items.LAPIS_LAZULI, 1, 200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.BLAST_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT, 1, 200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_IRON_EYE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.IRON_EYE, Items.IRON_INGOT, 1, 200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_QUARTZCHOP = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.QUARTZCHOP, Items.QUARTZ, 1, 200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_EMERALD_CROSSBOW = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.EMERALD_CROSSBOW, Items.EMERALD, 1, 200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_STONEFLESH = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.STONEFLESH, Items.LAPIS_LAZULI, 1, 200, DynamicRecipeLoader.furnaceTypes.blasting);
 
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_SKELETON, LootSkeletonEntity.createAbstractSkeletonAttributes());
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_ENDERMAN, LootEndermanEntity.createEndermanAttributes());
@@ -209,8 +211,8 @@ public class Lootgoblins implements ModInitializer {
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_GOBLIN, LootGoblinEntity.createMobAttributes());
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
-            if (world.random.nextFloat() < Declarer.config.goblinChance){
-                if (!(entity instanceof iLootGoblin)) {
+            if (world.random.nextFloat() < Declarer.config.goblinChance) {
+                if (!(entity instanceof iLootGoblin) && !(entity.isPlayer())) {
                     if (entity instanceof SkeletonEntity skeletonEntity) {
                         replaceEntity(skeletonEntity, Declarer.LOOT_SKELETON, world);
                     } else if (entity instanceof ZombieEntity zombieEntity) {
@@ -248,13 +250,159 @@ public class Lootgoblins implements ModInitializer {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             lootGoblin.equipStack(slot, source.getEquippedStack(slot));
         }
-        if (lootGoblin instanceof LootIllagerEntity lootIllagerEntity){
+        if (lootGoblin instanceof LootIllagerEntity lootIllagerEntity) {
             lootIllagerEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Declarer.EMERALD_CROSSBOW));
         }
+        int random = world.random.nextInt(goblinNames.length);
+        lootGoblin.setCustomName(Text.of(goblinNames[random] + (random<=4?" Noble Dog Knight": " The " + titleA[world.random.nextInt(titleA.length)] + titleB[world.random.nextInt(titleB.length)])));
         world.spawnEntity(lootGoblin);
         source.remove(Entity.RemovalReason.DISCARDED);
         return lootGoblin;
     }
+
+    public static String[] goblinNames = {
+            "Kynan",
+            "Scar13t",
+            "Striker",
+            "Bradley Chauvin",
+            "NoobGamer",
+            "Apkap",
+            "Brieh",
+            "Bruvzenq",
+            "Chert",
+            "Chuz",
+            "Cyail",
+            "Cyaz",
+            "Cyon",
+            "Cyublic",
+            "Delia",
+            "Dror",
+            "Drubzebs",
+            "Druphial",
+            "Eerboc",
+            "Epnaaq",
+            "Ets",
+            "Foxai",
+            "Glaaknealb",
+            "Gliavags",
+            "Gnubs",
+            "Graknup",
+            "Griurkain",
+            "Grom",
+            "Halbigz",
+            "Iaptoixe",
+            "Ippip",
+            "Jaarmup",
+            "Joltu",
+            "Jukt",
+            "Kiovzoikt",
+            "Kyic",
+            "Loklux",
+            "Luz",
+            "Muftiafi",
+            "Nikka",
+            "Osenx",
+            "Phiegs",
+            "Phusreng",
+            "Publem",
+            "Qahx",
+            "Qraq",
+            "Raabsofz",
+            "Ram",
+            "Reaeart",
+            "Rebhe",
+            "Sliort",
+            "Sriq",
+            "Stoszaats",
+            "Stribbaart",
+            "Taagnegs",
+            "Thihkeaxe",
+            "Treatleexai",
+            "Treerk",
+            "Trigs",
+            "Trippox",
+            "Tron",
+            "Trukx",
+            "Trurm",
+            "Tyokle",
+            "Uprat",
+            "Vrert",
+            "Waarxea",
+            "Wanarxee",
+            "Wroibunk",
+            "Xen",
+            "Xird",
+            "Yobkiar",
+            "Zidnazz",
+            "Zix"
+    };
+
+    public static String[] titleA = new String[]{
+            "Aether",
+            "Aspect",
+            "Azure",
+            "Blood",
+            "Chain",
+            "Cloud",
+            "Crimson",
+            "Dark",
+            "Distant",
+            "Dusk",
+            "Elder",
+            "Elf",
+            "Free",
+            "Furor",
+            "God",
+            "Haven",
+            "Marsh",
+            "Mist",
+            "Morn",
+            "Onyx",
+            "Other",
+            "Rage",
+            "Spark",
+            "Star",
+            "Still",
+            "Sun",
+            "Swift",
+            "Totem",
+            "Wild",
+            "Wonder",
+            "High",
+            "Low",
+            "Slow",
+            "Quick",
+            "Obsidian",
+            "Iron",
+            "Gold",
+            "Silver",
+            "Gray",
+    };
+    public static String[] titleB = new String[]{
+            " Blood",
+            " Child",
+            " Gift",
+            " Heart",
+            " One",
+            " Soul",
+            "born",
+            "bough",
+            "dancer",
+            "mark",
+            "ridge",
+            "snarl",
+            "snout",
+            "sorrow",
+            "sun",
+            "swift",
+            "wind",
+            "earth",
+            " Voice",
+            "cry",
+            "moon",
+            "tooth",
+            "chosen",
+    };
 
     public enum BeamColors {
         WHITE(1, 1, 1),
