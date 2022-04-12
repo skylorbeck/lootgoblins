@@ -32,9 +32,14 @@ import website.skylorbeck.minecraft.lootgoblins.Lootgoblins;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootManager;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootTables;
 
-public class LootGoblinEntity extends HostileEntity implements IAnimatable {
+public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLootGoblin {
     private final AnimationFactory factory = new AnimationFactory(this);
     public static final TrackedData<Integer> VARIANT = DataTracker.registerData(LootGoblinEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    //todo variants
+    // music
+    // sapling
+    // food
+    // cow
 
     public LootGoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -84,7 +89,7 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_STEP,1,1);
+        this.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_STEP,1,2);
         super.playStepSound(pos, state);
     }
 
@@ -98,9 +103,9 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable {
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
         if (causedByPlayer) {
             Identifier[] lootTable = switch (this.getVariant()) {
-                default -> LootTables.generic;
-                case 1 -> LootTables.hoglin;
-                case 2 -> LootTables.enderman;
+                default -> LootTables.loot_goblin;
+                case 1 -> LootTables.nether_goblin;
+                case 2 -> LootTables.ender_goblin;
                 case 3 -> LootTables.combat;
             };
             LootManager.dropLoot(this, lootTable);

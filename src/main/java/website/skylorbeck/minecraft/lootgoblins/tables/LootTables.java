@@ -123,6 +123,11 @@ public class LootTables {
             Registry.ITEM.getId(Items.ITEM_FRAME),
             Registry.ITEM.getId(Items.GLOW_ITEM_FRAME),
             Registry.ITEM.getId(Items.GUNPOWDER),
+            Registry.ITEM.getId(Items.IRON_BLOCK),
+            Registry.ITEM.getId(Items.GOLD_BLOCK),
+            Registry.ITEM.getId(Items.COPPER_BLOCK),
+            Registry.ITEM.getId(Items.DIAMOND),
+            Registry.ITEM.getId(Items.REDSTONE_BLOCK),
             Registry.ITEM.getId(Items.REDSTONE)
     };
     
@@ -131,7 +136,6 @@ public class LootTables {
             Registry.ITEM.getId(Items.IRON_PICKAXE),
             Registry.ITEM.getId(Items.IRON_AXE),
             Registry.ITEM.getId(Items.IRON_SHOVEL),
-            Registry.ITEM.getId(Items.IRON_HOE),
             Registry.ITEM.getId(Items.IRON_HORSE_ARMOR),
             Registry.ITEM.getId(Items.IRON_BOOTS),
             Registry.ITEM.getId(Items.IRON_CHESTPLATE),
@@ -142,13 +146,11 @@ public class LootTables {
             Registry.ITEM.getId(Items.STONE_PICKAXE),
             Registry.ITEM.getId(Items.STONE_AXE),
             Registry.ITEM.getId(Items.STONE_SHOVEL),
-            Registry.ITEM.getId(Items.STONE_HOE),
-            
+
             Registry.ITEM.getId(Items.GOLDEN_SWORD),
             Registry.ITEM.getId(Items.GOLDEN_PICKAXE),
             Registry.ITEM.getId(Items.GOLDEN_AXE),
             Registry.ITEM.getId(Items.GOLDEN_SHOVEL),
-            Registry.ITEM.getId(Items.GOLDEN_HOE),
             Registry.ITEM.getId(Items.GOLDEN_HORSE_ARMOR),
             Registry.ITEM.getId(Items.GOLDEN_BOOTS),
             Registry.ITEM.getId(Items.GOLDEN_CHESTPLATE),
@@ -189,28 +191,60 @@ public class LootTables {
     };
 
     public static Identifier[] creeper = new Identifier[]{
-            Registry.ITEM.getId(Items.REDSTONE),//todo replace
+            Lootgoblins.getIdentifier("red_bomb_item"),
             Registry.ITEM.getId(Items.GUNPOWDER),
-
     };
 
     public static Identifier[] hoglin = new Identifier[]{
-            Registry.ITEM.getId(Items.QUARTZ),//todo replace
+            Lootgoblins.getIdentifier("quartzchop_item"),
             Registry.ITEM.getId(Items.PORKCHOP),
     };
 
     public static Identifier[] illager = new Identifier[]{
-            Registry.ITEM.getId(Items.EMERALD),//todo replace
+            Lootgoblins.getIdentifier("emerald_crossbow_item"),
             Registry.ITEM.getId(Items.CROSSBOW),
     };
 
     public static Identifier[] spider = new Identifier[]{
-            Registry.ITEM.getId(Items.IRON_INGOT),//todo replace
+            Lootgoblins.getIdentifier("iron_eye_item"),
             Registry.ITEM.getId(Items.SPIDER_EYE),
     };
 
     public static Identifier[] zombie = new Identifier[]{
-            Registry.ITEM.getId(Items.LAPIS_LAZULI),//todo replace
+            Lootgoblins.getIdentifier("stoneflesh_item"),
             Registry.ITEM.getId(Items.ROTTEN_FLESH),
+    };
+
+    public static Identifier[] loot_goblin = new Identifier[]{
+            Registry.ITEM.getId(Items.DIAMOND),
+            Registry.ITEM.getId(Items.DIAMOND),
+            Registry.ITEM.getId(Items.IRON_BLOCK),
+            Registry.ITEM.getId(Items.IRON_BLOCK),
+            Registry.ITEM.getId(Items.REDSTONE_BLOCK),
+            Registry.ITEM.getId(Items.ENCHANTED_GOLDEN_APPLE),
+            Registry.ITEM.getId(Items.BUDDING_AMETHYST),
+    };
+
+    public static Identifier[] nether_goblin = new Identifier[]{
+            Registry.ITEM.getId(Items.NETHERITE_SCRAP),
+            Registry.ITEM.getId(Items.GOLD_BLOCK),
+            Registry.ITEM.getId(Items.GOLD_BLOCK),
+            Registry.ITEM.getId(Items.BLAZE_ROD),
+            Registry.ITEM.getId(Items.BLAZE_ROD),
+            Registry.ITEM.getId(Items.GLOWSTONE),
+            Registry.ITEM.getId(Items.GLOWSTONE_DUST),
+            Registry.ITEM.getId(Items.QUARTZ_BLOCK),
+    };
+
+    public static Identifier[] ender_goblin = new Identifier[]{
+            Registry.ITEM.getId(Items.ENDER_PEARL),
+            Registry.ITEM.getId(Items.ENDER_PEARL),
+            Registry.ITEM.getId(Items.SHULKER_SHELL),
+            Registry.ITEM.getId(Items.SHULKER_SHELL),
+            Registry.ITEM.getId(Items.DRAGON_BREATH),
+            Registry.ITEM.getId(Items.DRAGON_BREATH),
+            Registry.ITEM.getId(Items.CHORUS_FRUIT),
+            Registry.ITEM.getId(Items.CHORUS_FRUIT),
+            Registry.ITEM.getId(Items.END_CRYSTAL),
     };
 }

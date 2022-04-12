@@ -1,0 +1,6 @@
+{
+    "parent": "lootgoblins:item/emerald_crossbow_item",
+    "textures": {
+        "layer0": "lootgoblins:item/emerald_crossbow_pulling_0"
+    }
+}

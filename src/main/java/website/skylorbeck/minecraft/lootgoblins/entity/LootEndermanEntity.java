@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootManager;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootTables;
 
-public class LootEndermanEntity extends EndermanEntity {
+public class LootEndermanEntity extends EndermanEntity implements iLootGoblin{
     public LootEndermanEntity(EntityType<? extends EndermanEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 50;

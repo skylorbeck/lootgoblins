@@ -29,5 +29,14 @@ public class RecipeManagerMixin {
             return false;
         };
         createMap.apply(Declarer.SMELT_GOLD_BONE, "smelt_gold_bone");
+        createMap.apply(Declarer.SMELT_STONEFLESH, "smelt_stoneflesh");
+        createMap.apply(Declarer.SMELT_IRON_EYE, "smelt_iron_eye");
+        createMap.apply(Declarer.SMELT_EMERALD_CROSSBOW, "smelt_emerald_crossbow");
+        createMap.apply(Declarer.SMELT_QUARTZCHOP, "smelt_quartzchop");
+        createMap.apply(Declarer.BLAST_GOLD_BONE, "blast_gold_bone");
+        createMap.apply(Declarer.BLAST_STONEFLESH, "blast_stoneflesh");
+        createMap.apply(Declarer.BLAST_IRON_EYE, "blast_iron_eye");
+        createMap.apply(Declarer.BLAST_EMERALD_CROSSBOW, "blast_emerald_crossbow");
+        createMap.apply(Declarer.BLAST_QUARTZCHOP, "blast_quartzchop");
     }
 }

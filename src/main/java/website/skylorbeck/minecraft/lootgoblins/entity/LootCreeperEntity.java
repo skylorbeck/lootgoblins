@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootManager;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootTables;
 
-public class LootCreeperEntity extends CreeperEntity {
+public class LootCreeperEntity extends CreeperEntity implements iLootGoblin{
     public LootCreeperEntity(EntityType<? extends CreeperEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 50;

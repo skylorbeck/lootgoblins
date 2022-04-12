@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootManager;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootTables;
 
-public class LootSkeletonEntity extends SkeletonEntity {
+public class LootSkeletonEntity extends SkeletonEntity implements iLootGoblin {
     public LootSkeletonEntity(EntityType<? extends LootSkeletonEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 50;

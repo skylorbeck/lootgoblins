@@ -5,6 +5,7 @@ import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -14,6 +15,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
@@ -72,107 +74,86 @@ public class Lootgoblins implements ModInitializer {
             sids = new ArrayList<>(Arrays.stream(LootTables.combat).toList());
             sids.add(new Identifier("sentimentality3","diorite_axe"));
             sids.add(new Identifier("sentimentality3","diorite_shovel"));
-            sids.add(new Identifier("sentimentality3","diorite_hoe"));
             sids.add(new Identifier("sentimentality3","diorite_sword"));
             sids.add(new Identifier("sentimentality3","diorite_pick"));
             sids.add(new Identifier("sentimentality3","andesite_axe"));
             sids.add(new Identifier("sentimentality3","andesite_shovel"));
-            sids.add(new Identifier("sentimentality3","andesite_hoe"));
             sids.add(new Identifier("sentimentality3","andesite_sword"));
             sids.add(new Identifier("sentimentality3","andesite_pick"));
             sids.add(new Identifier("sentimentality3","amethyst_axe"));
             sids.add(new Identifier("sentimentality3","amethyst_shovel"));
-            sids.add(new Identifier("sentimentality3","amethyst_hoe"));
             sids.add(new Identifier("sentimentality3","amethyst_sword"));
             sids.add(new Identifier("sentimentality3","amethyst_pick"));
             sids.add(new Identifier("sentimentality3","granite_axe"));
             sids.add(new Identifier("sentimentality3","granite_shovel"));
-            sids.add(new Identifier("sentimentality3","granite_hoe"));
             sids.add(new Identifier("sentimentality3","granite_sword"));
             sids.add(new Identifier("sentimentality3","granite_pick"));
             sids.add(new Identifier("sentimentality3","copper_axe"));
             sids.add(new Identifier("sentimentality3","copper_shovel"));
-            sids.add(new Identifier("sentimentality3","copper_hoe"));
             sids.add(new Identifier("sentimentality3","copper_sword"));
             sids.add(new Identifier("sentimentality3","copper_pick"));
             sids.add(new Identifier("sentimentality3","quartz_axe"));
             sids.add(new Identifier("sentimentality3","quartz_shovel"));
-            sids.add(new Identifier("sentimentality3","quartz_hoe"));
             sids.add(new Identifier("sentimentality3","quartz_sword"));
             sids.add(new Identifier("sentimentality3","quartz_pick"));
             sids.add(new Identifier("sentimentality3","emerald_axe"));
             sids.add(new Identifier("sentimentality3","emerald_shovel"));
-            sids.add(new Identifier("sentimentality3","emerald_hoe"));
             sids.add(new Identifier("sentimentality3","emerald_sword"));
             sids.add(new Identifier("sentimentality3","emerald_pick"));
             sids.add(new Identifier("sentimentality3","lapis_axe"));
             sids.add(new Identifier("sentimentality3","lapis_shovel"));
-            sids.add(new Identifier("sentimentality3","lapis_hoe"));
             sids.add(new Identifier("sentimentality3","lapis_sword"));
             sids.add(new Identifier("sentimentality3","lapis_pick"));
             sids.add(new Identifier("sentimentality3","redstone_axe"));
             sids.add(new Identifier("sentimentality3","redstone_shovel"));
-            sids.add(new Identifier("sentimentality3","redstone_hoe"));
             sids.add(new Identifier("sentimentality3","redstone_sword"));
             sids.add(new Identifier("sentimentality3","redstone_pick"));
             sids.add(new Identifier("sentimentality3","netherrack_axe"));
             sids.add(new Identifier("sentimentality3","netherrack_shovel"));
-            sids.add(new Identifier("sentimentality3","netherrack_hoe"));
             sids.add(new Identifier("sentimentality3","netherrack_sword"));
             sids.add(new Identifier("sentimentality3","netherrack_pick"));
             sids.add(new Identifier("sentimentality3","netherbrick_axe"));
             sids.add(new Identifier("sentimentality3","netherbrick_shovel"));
-            sids.add(new Identifier("sentimentality3","netherbrick_hoe"));
             sids.add(new Identifier("sentimentality3","netherbrick_sword"));
             sids.add(new Identifier("sentimentality3","netherbrick_pick"));
             sids.add(new Identifier("sentimentality3","rednetherbrick_axe"));
             sids.add(new Identifier("sentimentality3","rednetherbrick_shovel"));
-            sids.add(new Identifier("sentimentality3","rednetherbrick_hoe"));
             sids.add(new Identifier("sentimentality3","rednetherbrick_sword"));
             sids.add(new Identifier("sentimentality3","rednetherbrick_pick"));
             sids.add(new Identifier("sentimentality3","sandstone_axe"));
             sids.add(new Identifier("sentimentality3","sandstone_shovel"));
-            sids.add(new Identifier("sentimentality3","sandstone_hoe"));
             sids.add(new Identifier("sentimentality3","sandstone_sword"));
             sids.add(new Identifier("sentimentality3","sandstone_pick"));
             sids.add(new Identifier("sentimentality3","redsandstone_axe"));
             sids.add(new Identifier("sentimentality3","redsandstone_shovel"));
-            sids.add(new Identifier("sentimentality3","redsandstone_hoe"));
             sids.add(new Identifier("sentimentality3","redsandstone_sword"));
             sids.add(new Identifier("sentimentality3","redsandstone_pick"));
             sids.add(new Identifier("sentimentality3","flint_axe"));
             sids.add(new Identifier("sentimentality3","flint_shovel"));
-            sids.add(new Identifier("sentimentality3","flint_hoe"));
             sids.add(new Identifier("sentimentality3","flint_sword"));
             sids.add(new Identifier("sentimentality3","flint_pick"));
             sids.add(new Identifier("sentimentality3","blackstone_axe"));
             sids.add(new Identifier("sentimentality3","blackstone_shovel"));
-            sids.add(new Identifier("sentimentality3","blackstone_hoe"));
             sids.add(new Identifier("sentimentality3","blackstone_sword"));
             sids.add(new Identifier("sentimentality3","blackstone_pick"));
             sids.add(new Identifier("sentimentality3","basalt_axe"));
             sids.add(new Identifier("sentimentality3","basalt_shovel"));
-            sids.add(new Identifier("sentimentality3","basalt_hoe"));
             sids.add(new Identifier("sentimentality3","basalt_sword"));
             sids.add(new Identifier("sentimentality3","basalt_pick"));
             sids.add(new Identifier("sentimentality3","endstone_axe"));
             sids.add(new Identifier("sentimentality3","endstone_shovel"));
-            sids.add(new Identifier("sentimentality3","endstone_hoe"));
             sids.add(new Identifier("sentimentality3","endstone_sword"));
             sids.add(new Identifier("sentimentality3","endstone_pick"));
             sids.add(new Identifier("sentimentality3","warped_axe"));
             sids.add(new Identifier("sentimentality3","warped_shovel"));
-            sids.add(new Identifier("sentimentality3","warped_hoe"));
             sids.add(new Identifier("sentimentality3","warped_sword"));
             sids.add(new Identifier("sentimentality3","warped_pick"));
             sids.add(new Identifier("sentimentality3","crimson_axe"));
             sids.add(new Identifier("sentimentality3","crimson_shovel"));
-            sids.add(new Identifier("sentimentality3","crimson_hoe"));
             sids.add(new Identifier("sentimentality3","crimson_sword"));
             sids.add(new Identifier("sentimentality3","crimson_pick"));
             sids.add(new Identifier("sentimentality3","deepslate_axe"));
             sids.add(new Identifier("sentimentality3","deepslate_shovel"));
-            sids.add(new Identifier("sentimentality3","deepslate_hoe"));
             sids.add(new Identifier("sentimentality3","deepslate_sword"));
             sids.add(new Identifier("sentimentality3","deepslate_pick"));
             sids.add(new Identifier("sentimentality3","copper_helmet"));
@@ -195,11 +176,28 @@ public class Lootgoblins implements ModInitializer {
         LootTables.illager = ConfigFileHandler.initConfigFile("lootgoblins/illager_table.json", LootTables.illager);
         LootTables.spider = ConfigFileHandler.initConfigFile("lootgoblins/spider_table.json", LootTables.spider);
         LootTables.zombie = ConfigFileHandler.initConfigFile("lootgoblins/zombie_table.json", LootTables.zombie);
+        LootTables.loot_goblin = ConfigFileHandler.initConfigFile("lootgoblins/overworld_goblin_table.json", LootTables.loot_goblin);
+        LootTables.nether_goblin = ConfigFileHandler.initConfigFile("lootgoblins/nether_goblin_table.json", LootTables.nether_goblin);
+        LootTables.ender_goblin = ConfigFileHandler.initConfigFile("lootgoblins/end_goblin_table.json", LootTables.ender_goblin);
 
         regItem("gold_bone_", Declarer.GOLD_BONE);
         regItem("prismarine_pearl_", Declarer.PRISMARINE_PEARL);
+        regItem("iron_eye_", Declarer.IRON_EYE);
+        regItem("quartzchop_", Declarer.QUARTZCHOP);
+        regItem("emerald_crossbow_", Declarer.EMERALD_CROSSBOW);
+        regItem("red_bomb_", Declarer.RED_BOMB);
+        regItem("stoneflesh_", Declarer.STONEFLESH);
 
         Declarer.SMELT_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_IRON_EYE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.IRON_EYE, Items.IRON_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_QUARTZCHOP = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.QUARTZCHOP, Items.QUARTZ,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_EMERALD_CROSSBOW = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.EMERALD_CROSSBOW, Items.EMERALD,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.SMELT_STONEFLESH = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.STONEFLESH, Items.LAPIS_LAZULI,1,200, DynamicRecipeLoader.furnaceTypes.smelting);
+        Declarer.BLAST_GOLD_BONE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.GOLD_BONE, Items.GOLD_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_IRON_EYE = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.IRON_EYE, Items.IRON_INGOT,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_QUARTZCHOP = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.QUARTZCHOP, Items.QUARTZ,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_EMERALD_CROSSBOW = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.EMERALD_CROSSBOW, Items.EMERALD,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
+        Declarer.BLAST_STONEFLESH = DynamicRecipeLoader.createSmeltingRecipeJson(Declarer.STONEFLESH, Items.LAPIS_LAZULI,1,200, DynamicRecipeLoader.furnaceTypes.blasting);
 
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_SKELETON, LootSkeletonEntity.createAbstractSkeletonAttributes());
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_ENDERMAN, LootEndermanEntity.createEndermanAttributes());
@@ -212,30 +210,25 @@ public class Lootgoblins implements ModInitializer {
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
             if (world.random.nextFloat() < Declarer.config.goblinChance){
-                if (!(entity instanceof LootSkeletonEntity) && entity instanceof SkeletonEntity skeletonEntity ) {
-                    replaceEntity(skeletonEntity, Declarer.LOOT_SKELETON, world);
-                } else
-                if (!(entity instanceof LootZombieEntity) && entity instanceof ZombieEntity zombieEntity) {
-                    replaceEntity(zombieEntity, Declarer.LOOT_ZOMBIE, world);
-                } else
-                if (!(entity instanceof LootSpiderEntity) && entity instanceof SpiderEntity spiderEntity) {
-                    replaceEntity(spiderEntity, Declarer.LOOT_SPIDER, world);
-                } else
-                if (!(entity instanceof LootCreeperEntity) && entity instanceof CreeperEntity creeperEntity) {
-                    replaceEntity(creeperEntity, Declarer.LOOT_CREEPER, world);
-                } else
-                if (!(entity instanceof LootHoglinEntity) && entity instanceof HoglinEntity hoglinEntity) {
-                    replaceEntity(hoglinEntity, Declarer.LOOT_HOGLIN, world);
-                } else
-                if (!(entity instanceof LootIllagerEntity) && entity instanceof PillagerEntity illagerEntity) {
-                    replaceEntity(illagerEntity, Declarer.LOOT_ILLAGER, world);
-                } else
-                if (!(entity instanceof LootEndermanEntity) && entity instanceof EndermanEntity endermanEntity) {
-                    replaceEntity(endermanEntity, Declarer.LOOT_ENDERMAN, world);
-                }
-                else if (entity instanceof LivingEntity){
-                   LootGoblinEntity lootGoblin = (LootGoblinEntity) replaceEntity((LivingEntity) entity,Declarer.LOOT_GOBLIN,world);
-                   lootGoblin.setVariant(world.random.nextInt(4));
+                if (!(entity instanceof iLootGoblin)) {
+                    if (entity instanceof SkeletonEntity skeletonEntity) {
+                        replaceEntity(skeletonEntity, Declarer.LOOT_SKELETON, world);
+                    } else if (entity instanceof ZombieEntity zombieEntity) {
+                        replaceEntity(zombieEntity, Declarer.LOOT_ZOMBIE, world);
+                    } else if (entity instanceof SpiderEntity spiderEntity) {
+                        replaceEntity(spiderEntity, Declarer.LOOT_SPIDER, world);
+                    } else if (entity instanceof CreeperEntity creeperEntity) {
+                        replaceEntity(creeperEntity, Declarer.LOOT_CREEPER, world);
+                    } else if (entity instanceof HoglinEntity hoglinEntity) {
+                        replaceEntity(hoglinEntity, Declarer.LOOT_HOGLIN, world);
+                    } else if (entity instanceof PillagerEntity illagerEntity) {
+                        replaceEntity(illagerEntity, Declarer.LOOT_ILLAGER, world);
+                    } else if (entity instanceof EndermanEntity endermanEntity) {
+                        replaceEntity(endermanEntity, Declarer.LOOT_ENDERMAN, world);
+                    } else if (entity instanceof LivingEntity) {
+                        LootGoblinEntity lootGoblin = (LootGoblinEntity) replaceEntity((LivingEntity) entity, Declarer.LOOT_GOBLIN, world);
+                        lootGoblin.setVariant(world.random.nextInt(4));
+                    }
                 }
             }
         }));
@@ -254,6 +247,9 @@ public class Lootgoblins implements ModInitializer {
         lootGoblin.copyPositionAndRotation(source);
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             lootGoblin.equipStack(slot, source.getEquippedStack(slot));
+        }
+        if (lootGoblin instanceof LootIllagerEntity lootIllagerEntity){
+            lootIllagerEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Declarer.EMERALD_CROSSBOW));
         }
         world.spawnEntity(lootGoblin);
         source.remove(Entity.RemovalReason.DISCARDED);
@@ -281,3 +277,7 @@ public class Lootgoblins implements ModInitializer {
     }
 }
 //todo lang file
+
+//known issues
+//goblins replace entity on save-load, unfixable
+//todo emerald crossbow reloads weird
