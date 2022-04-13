@@ -38,7 +38,6 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
     //todo variants
     // music
     // sapling
-    // food
     // cow
 
     public LootGoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -107,6 +106,7 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
                 case 1 -> LootTables.nether_goblin;
                 case 2 -> LootTables.ender_goblin;
                 case 3 -> LootTables.combat;
+                case 4 -> LootTables.cake;
             };
             LootManager.dropLoot(this, lootTable);
         }
@@ -135,8 +135,9 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
         if (event.isMoving()){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lootgoblin.run"));
         } else {
-            event.getController().clearAnimationCache();
-            return PlayState.STOP;
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lootgoblin.idle"));
+            /*event.getController().clearAnimationCache();
+            return PlayState.STOP;*/
         }
         return PlayState.CONTINUE;
     }

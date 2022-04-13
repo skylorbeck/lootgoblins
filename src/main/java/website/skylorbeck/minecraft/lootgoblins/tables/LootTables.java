@@ -163,6 +163,15 @@ public class LootTables {
             Registry.ITEM.getId(Items.CHAINMAIL_HELMET),
     };
 
+    public static Identifier[] cake = new Identifier[]{
+            Registry.ITEM.getId(Items.CAKE),
+            Registry.ITEM.getId(Items.COOKIE),
+            Registry.ITEM.getId(Items.WHEAT),
+            Registry.ITEM.getId(Items.MILK_BUCKET),
+            Registry.ITEM.getId(Items.EGG),
+            Registry.ITEM.getId(Items.SUGAR),
+    };
+
     public static Identifier[] musicDisks = new Identifier[]{
             Registry.ITEM.getId(Items.MUSIC_DISC_13),
             Registry.ITEM.getId(Items.MUSIC_DISC_11),

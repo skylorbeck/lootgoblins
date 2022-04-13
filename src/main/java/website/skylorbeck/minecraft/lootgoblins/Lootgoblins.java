@@ -13,6 +13,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -181,6 +183,7 @@ public class Lootgoblins implements ModInitializer {
         LootTables.loot_goblin = ConfigFileHandler.initConfigFile("lootgoblins/overworld_goblin_table.json", LootTables.loot_goblin);
         LootTables.nether_goblin = ConfigFileHandler.initConfigFile("lootgoblins/nether_goblin_table.json", LootTables.nether_goblin);
         LootTables.ender_goblin = ConfigFileHandler.initConfigFile("lootgoblins/end_goblin_table.json", LootTables.ender_goblin);
+        LootTables.cake = ConfigFileHandler.initConfigFile("lootgoblins/cake_table.json", LootTables.cake);
 
         regItem("gold_bone_", Declarer.GOLD_BONE);
         regItem("prismarine_pearl_", Declarer.PRISMARINE_PEARL);
@@ -212,7 +215,7 @@ public class Lootgoblins implements ModInitializer {
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
             if (world.random.nextFloat() < Declarer.config.goblinChance) {
-                if (!(entity instanceof iLootGoblin) && !(entity.isPlayer())) {
+                if (!(entity instanceof iLootGoblin) && !(entity.isPlayer()) && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity)) {
                     if (entity instanceof SkeletonEntity skeletonEntity) {
                         replaceEntity(skeletonEntity, Declarer.LOOT_SKELETON, world);
                     } else if (entity instanceof ZombieEntity zombieEntity) {
@@ -229,7 +232,7 @@ public class Lootgoblins implements ModInitializer {
                         replaceEntity(endermanEntity, Declarer.LOOT_ENDERMAN, world);
                     } else if (entity instanceof LivingEntity) {
                         LootGoblinEntity lootGoblin = (LootGoblinEntity) replaceEntity((LivingEntity) entity, Declarer.LOOT_GOBLIN, world);
-                        lootGoblin.setVariant(world.random.nextInt(4));
+                        lootGoblin.setVariant(world.random.nextInt(5));
                     }
                 }
             }
@@ -264,7 +267,7 @@ public class Lootgoblins implements ModInitializer {
             "Kynan",
             "Scar13t",
             "Striker",
-            "Bradley Chauvin",
+            "BradleyChauvin",
             "NoobGamer",
             "Apkap",
             "Brieh",
