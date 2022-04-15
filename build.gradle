@@ -29,7 +29,7 @@ dependencies {
     modApi("com.terraformersmc:modmenu:${project.mod_menu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modRuntimeOnly("website.skylorbeck.sentimentality3:Sentimentality3:${project.sentimentality_version}")
+//    modRuntimeOnly("website.skylorbeck.sentimentality3:Sentimentality3:${project.sentimentality_version}")
 
     modRuntimeOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
