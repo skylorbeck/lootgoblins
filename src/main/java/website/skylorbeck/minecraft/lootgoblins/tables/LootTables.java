@@ -128,6 +128,7 @@ public class LootTables {
             Registry.ITEM.getId(Items.COPPER_BLOCK),
             Registry.ITEM.getId(Items.DIAMOND),
             Registry.ITEM.getId(Items.REDSTONE_BLOCK),
+            Registry.ITEM.getId(Items.COBWEB),
             Registry.ITEM.getId(Items.REDSTONE)
     };
     
@@ -250,4 +251,52 @@ public class LootTables {
             Registry.ITEM.getId(Items.CHORUS_FRUIT),
             Registry.ITEM.getId(Items.END_CRYSTAL),
     };
+
+    public static Identifier[] plant_goblin = new Identifier[]{
+            Registry.ITEM.getId(Items.ACACIA_SAPLING),
+            Registry.ITEM.getId(Items.BIRCH_SAPLING),
+            Registry.ITEM.getId(Items.SPRUCE_SAPLING),
+            Registry.ITEM.getId(Items.DARK_OAK_SAPLING),
+            Registry.ITEM.getId(Items.JUNGLE_SAPLING),
+            Registry.ITEM.getId(Items.OAK_SAPLING),
+            Registry.ITEM.getId(Items.CACTUS),
+            Registry.ITEM.getId(Items.DANDELION),
+            Registry.ITEM.getId(Items.POPPY),
+            Registry.ITEM.getId(Items.BLUE_ORCHID),
+            Registry.ITEM.getId(Items.ALLIUM),
+            Registry.ITEM.getId(Items.AZURE_BLUET),
+            Registry.ITEM.getId(Items.RED_TULIP),
+            Registry.ITEM.getId(Items.ORANGE_TULIP),
+            Registry.ITEM.getId(Items.WHITE_TULIP),
+            Registry.ITEM.getId(Items.PINK_TULIP),
+            Registry.ITEM.getId(Items.OXEYE_DAISY),
+            Registry.ITEM.getId(Items.CORNFLOWER),
+            Registry.ITEM.getId(Items.LILY_OF_THE_VALLEY),
+            Registry.ITEM.getId(Items.WITHER_ROSE),
+            Registry.ITEM.getId(Items.SUNFLOWER),
+            Registry.ITEM.getId(Items.LILAC),
+            Registry.ITEM.getId(Items.ROSE_BUSH),
+            Registry.ITEM.getId(Items.PEONY),
+            Registry.ITEM.getId(Items.GRASS_BLOCK),
+            Registry.ITEM.getId(Items.BONE_MEAL),
+            Registry.ITEM.getId(Items.POTATO),
+            Registry.ITEM.getId(Items.CARROT),
+            Registry.ITEM.getId(Items.FERN),
+            Registry.ITEM.getId(Items.LARGE_FERN),
+            Registry.ITEM.getId(Items.STONE_SHOVEL),
+            Registry.ITEM.getId(Items.STONE_HOE),
+            Registry.ITEM.getId(Items.WOODEN_SHOVEL),
+            Registry.ITEM.getId(Items.WOODEN_HOE),
+            Registry.ITEM.getId(Items.SHEARS),
+            Registry.ITEM.getId(Items.FLOWER_POT),
+    };
+    public static Identifier[] easter_goblin = new Identifier[]{
+            Registry.ITEM.getId(Items.RABBIT_FOOT),
+            Registry.ITEM.getId(Items.RABBIT_HIDE),
+            Registry.ITEM.getId(Items.RABBIT),
+            Registry.ITEM.getId(Items.EGG),
+            Registry.ITEM.getId(Items.CARROT),
+            Registry.ITEM.getId(Items.CARROT),
+    };
+
 }

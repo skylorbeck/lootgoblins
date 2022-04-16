@@ -48,7 +48,10 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
     // snowy
     // feral
     // mushroom
-    // green goblin
+    // green
+    // skeleton
+    // explorer
+    // ore
 
     public LootGoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -142,6 +145,8 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
                 case 2 -> LootTables.ender_goblin;
                 case 3 -> LootTables.combat;
                 case 4 -> LootTables.cake;
+                case 5 -> LootTables.plant_goblin;
+                case 6 -> LootTables.easter_goblin;
             };
             LootManager.dropLoot(this, lootTable);
         }
