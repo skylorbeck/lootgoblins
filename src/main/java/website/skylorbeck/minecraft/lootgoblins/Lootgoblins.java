@@ -215,7 +215,7 @@ public class Lootgoblins implements ModInitializer {
 
         ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
             if (world.random.nextFloat() < Declarer.config.goblinChance) {
-                if (!(entity instanceof iLootGoblin) && !(entity.isPlayer()) && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity)) {
+                if (!(entity instanceof iLootGoblin) && !(entity.isPlayer()) && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity) && !(entity instanceof GuardianEntity)) {
                     if (entity instanceof SkeletonEntity skeletonEntity) {
                         replaceEntity(skeletonEntity, Declarer.LOOT_SKELETON, world);
                     } else if (entity instanceof ZombieEntity zombieEntity) {

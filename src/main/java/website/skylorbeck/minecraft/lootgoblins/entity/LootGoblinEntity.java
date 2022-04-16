@@ -43,10 +43,21 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
     // music
     // sapling
     // cow
+    // fish
+    // stone
+    // snowy
+    // feral
+    // mushroom
+    // green goblin
 
     public LootGoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 100;
+    }
+
+    @Override
+    public boolean isFireImmune() {
+        return getVariant() == 1;
     }
 
     @Override
