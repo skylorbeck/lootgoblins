@@ -2,6 +2,7 @@ package website.skylorbeck.minecraft.lootgoblins.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -14,9 +15,12 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -43,6 +47,26 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
     public LootGoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 100;
+    }
+
+    @Override
+    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+        if (player.getStackInHand(hand).isOf(Items.LEATHER_HELMET)){
+            this.equipStack(EquipmentSlot.HEAD,Items.LEATHER_HELMET.getDefaultStack());
+        } else
+        if (player.getStackInHand(hand).isOf(Items.IRON_HELMET)){
+            this.equipStack(EquipmentSlot.HEAD,Items.IRON_HELMET.getDefaultStack());
+        } else
+        if (player.getStackInHand(hand).isOf(Items.GOLDEN_HELMET)){
+            this.equipStack(EquipmentSlot.HEAD,Items.GOLDEN_HELMET.getDefaultStack());
+        } else
+        if (player.getStackInHand(hand).isOf(Items.DIAMOND_HELMET)){
+            this.equipStack(EquipmentSlot.HEAD,Items.DIAMOND_HELMET.getDefaultStack());
+        } else
+        if (player.getStackInHand(hand).isOf(Items.NETHERITE_HELMET)){
+            this.equipStack(EquipmentSlot.HEAD,Items.NETHERITE_HELMET.getDefaultStack());
+        }
+        return super.interactMob(player, hand);
     }
 
     @Override

@@ -253,9 +253,6 @@ public class Lootgoblins implements ModInitializer {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             lootGoblin.equipStack(slot, source.getEquippedStack(slot));
         }
-        if (lootGoblin instanceof LootIllagerEntity lootIllagerEntity) {
-            lootIllagerEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Declarer.EMERALD_CROSSBOW));
-        }
         int random = world.random.nextInt(goblinNames.length);
         lootGoblin.setCustomName(Text.of(goblinNames[random] + (random<=4?" Noble Dog Knight": " The " + titleA[world.random.nextInt(titleA.length)] + titleB[world.random.nextInt(titleB.length)])));
         world.spawnEntity(lootGoblin);

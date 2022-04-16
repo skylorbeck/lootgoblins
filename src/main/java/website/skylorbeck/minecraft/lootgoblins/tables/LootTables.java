@@ -170,6 +170,7 @@ public class LootTables {
             Registry.ITEM.getId(Items.MILK_BUCKET),
             Registry.ITEM.getId(Items.EGG),
             Registry.ITEM.getId(Items.SUGAR),
+            Registry.ITEM.getId(Items.COCOA_BEANS),
     };
 
     public static Identifier[] musicDisks = new Identifier[]{
