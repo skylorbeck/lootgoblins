@@ -24,6 +24,7 @@ public class LootGoblinModel extends AnimatedGeoModel<LootGoblinEntity> {
             case 4 -> Lootgoblins.getIdentifier("textures/entity/lootgoblin/cake.png");
             case 5 -> Lootgoblins.getIdentifier("textures/entity/lootgoblin/plantgoblin.png");
             case 6 -> Lootgoblins.getIdentifier("textures/entity/lootgoblin/eastergoblin.png");
+            case 7 -> Lootgoblins.getIdentifier("textures/entity/lootgoblin/witch.png");
         };
     }
 

@@ -41,7 +41,6 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
     public static final TrackedData<Integer> VARIANT = DataTracker.registerData(LootGoblinEntity.class, TrackedDataHandlerRegistry.INTEGER);
     //todo variants
     // music
-    // sapling
     // cow
     // fish
     // stone
@@ -52,7 +51,10 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
     // skeleton
     // explorer
     // ore
+    // pirate
+    // ninja
 
+    // lillypad boat
     public LootGoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 100;
@@ -147,6 +149,7 @@ public class LootGoblinEntity extends HostileEntity implements IAnimatable,iLoot
                 case 4 -> LootTables.cake;
                 case 5 -> LootTables.plant_goblin;
                 case 6 -> LootTables.easter_goblin;
+                case 7 -> LootTables.witch_goblin;
             };
             LootManager.dropLoot(this, lootTable);
         }

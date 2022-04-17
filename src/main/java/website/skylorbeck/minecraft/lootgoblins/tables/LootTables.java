@@ -298,5 +298,16 @@ public class LootTables {
             Registry.ITEM.getId(Items.CARROT),
             Registry.ITEM.getId(Items.CARROT),
     };
+    public static Identifier[] witch_goblin = new Identifier[]{
+            Registry.ITEM.getId(Items.GLASS_BOTTLE),
+            Registry.ITEM.getId(Items.GUNPOWDER),
+            Registry.ITEM.getId(Items.REDSTONE),
+            Registry.ITEM.getId(Items.SPIDER_EYE),
+            Registry.ITEM.getId(Items.EMERALD),
+            Registry.ITEM.getId(Items.CAULDRON),
+            Registry.ITEM.getId(Items.STRING),
+            Registry.ITEM.getId(Items.GLOWSTONE_DUST),
+            Registry.ITEM.getId(Items.BLAZE_POWDER),
+    };
 
 }

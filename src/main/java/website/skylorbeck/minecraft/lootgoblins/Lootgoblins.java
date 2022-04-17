@@ -185,6 +185,7 @@ public class Lootgoblins implements ModInitializer {
         LootTables.ender_goblin = ConfigFileHandler.initConfigFile("lootgoblins/end_goblin_table.json", LootTables.ender_goblin);
         LootTables.cake = ConfigFileHandler.initConfigFile("lootgoblins/cake_table.json", LootTables.cake);
         LootTables.plant_goblin = ConfigFileHandler.initConfigFile("lootgoblins/plant_goblin.json",LootTables.plant_goblin);
+        LootTables.witch_goblin = ConfigFileHandler.initConfigFile("lootgoblins/witch_goblin.json",LootTables.witch_goblin);
 
         regItem("gold_bone_", Declarer.GOLD_BONE);
         regItem("prismarine_pearl_", Declarer.PRISMARINE_PEARL);
@@ -233,7 +234,7 @@ public class Lootgoblins implements ModInitializer {
                         replaceEntity(endermanEntity, Declarer.LOOT_ENDERMAN, world);
                     } else if (entity instanceof LivingEntity) {
                         LootGoblinEntity lootGoblin = (LootGoblinEntity) replaceEntity((LivingEntity) entity, Declarer.LOOT_GOBLIN, world);
-                        lootGoblin.setVariant(world.random.nextInt(5));
+                        lootGoblin.setVariant(world.random.nextInt(8));
                     }
                 }
             }
@@ -255,7 +256,7 @@ public class Lootgoblins implements ModInitializer {
             lootGoblin.equipStack(slot, source.getEquippedStack(slot));
         }
         int random = world.random.nextInt(goblinNames.length);
-        lootGoblin.setCustomName(Text.of(goblinNames[random] + (random<=6?" Noble Dog Knight": " The " + titleA[world.random.nextInt(titleA.length)] + titleB[world.random.nextInt(titleB.length)])));
+        lootGoblin.setCustomName(Text.of(goblinNames[random] + (random<=4?" Noble Dog Knight": " The " + titleA[world.random.nextInt(titleA.length)] + titleB[world.random.nextInt(titleB.length)])));
         world.spawnEntity(lootGoblin);
         source.remove(Entity.RemovalReason.DISCARDED);
         return lootGoblin;

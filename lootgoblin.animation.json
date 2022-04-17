@@ -493,21 +493,6 @@
 						}
 					}
 				},
-				"earring4": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.52": {
-							"vector": [10, 0, 0],
-							"easing": "easeOutSine"
-						},
-						"1.12": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutSine"
-						}
-					}
-				},
 				"jaw": {
 					"rotation": {
 						"0.0": {
