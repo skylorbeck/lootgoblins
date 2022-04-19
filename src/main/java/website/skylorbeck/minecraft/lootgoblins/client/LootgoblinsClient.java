@@ -55,7 +55,7 @@ public class LootgoblinsClient implements ClientModInitializer {
         ModelPredicateProviderRegistry.register(Declarer.EMERALD_CROSSBOW, new Identifier("firework"), (stack, world, entity, seed) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.hasProjectile(stack, Items.FIREWORK_ROCKET) ? 1.0f : 0.0f);
 
         keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                        "key.lootgoblin.itemlink",
+                        "key.lootgoblins.itemlink",
                         InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_LEFT_ALT,
                 "category.lootgoblins"));
