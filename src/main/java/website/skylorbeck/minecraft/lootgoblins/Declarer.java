@@ -1,6 +1,7 @@
 package website.skylorbeck.minecraft.lootgoblins;
 
 import com.google.gson.JsonObject;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
@@ -158,4 +159,6 @@ public class Declarer {
     public static JsonObject BLAST_EMERALD_CROSSBOW;
     public static JsonObject BLAST_IRON_EYE;
     public static JsonObject BLAST_STONEFLESH;
+
+
 }

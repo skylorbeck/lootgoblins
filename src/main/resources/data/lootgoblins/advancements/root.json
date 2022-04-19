@@ -1,0 +1,93 @@
+{
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
+    "display": {
+        "title": {
+            "text": "Treasure Hunter",
+            "color": "gold",
+            "bold": false,
+            "obfuscated": false
+        },
+        "description": {
+            "text": "Kill a Minor Goblin",
+            "color": "white"
+        },
+        "icon": {
+            "item": "lootgoblins:gold_bone_item"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "1": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "lootgoblins:golden_skeleton"
+                }
+            }
+        },
+        "2": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "lootgoblins:prismarine_enderman"
+                }
+            }
+        },
+        "3": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "lootgoblins:redstone_creeper"
+                }
+            }
+        },
+        "4": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "lootgoblins:quartz_hoglin"
+                }
+            }
+        },
+        "5": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "lootgoblins:emerald_illager"
+                }
+            }
+        },
+        "6": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "lootgoblins:iron_spider"
+                }
+            }
+        },
+        "7": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "lootgoblins:lapis_zombie"
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ]
+    ],
+    "parent": "minecraft:adventure/root"
+}
