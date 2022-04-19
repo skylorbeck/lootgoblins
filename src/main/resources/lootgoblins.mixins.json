@@ -4,9 +4,11 @@
   "package": "website.skylorbeck.minecraft.lootgoblins.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "FocusedSlotAccessor",
     "RecipeManagerMixin"
   ],
   "client": [
+    "HandledScreenMixin",
     "ItemEntityRendererMixin"
   ],
   "injectors": {

@@ -6,6 +6,8 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -20,8 +22,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.MessageType;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -239,6 +246,14 @@ public class Lootgoblins implements ModInitializer {
                 }
             }
         }));
+
+        ServerPlayNetworking.registerGlobalReceiver(getIdentifier("itemlink"),((server, player, handler, buf, responseSender) -> {
+            Text text = buf.readText();
+            Text playerDisplayName = player.getDisplayName();
+            TranslatableText translatableText = new TranslatableText("lootgoblins.itemlink.chat",playerDisplayName,text);
+            server.getPlayerManager().sendToAll(new GameMessageS2CPacket(translatableText, MessageType.CHAT,player.getUuid()));
+        }
+        ));
     }
 
     private void regItem(String name, Item item) {
