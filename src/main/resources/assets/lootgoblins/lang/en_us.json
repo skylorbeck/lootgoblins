@@ -14,6 +14,7 @@
   "item.lootgoblins.quartzchop_item": "Quartzchop",
   "item.lootgoblins.red_bomb_item": "Red Bomb",
   "item.lootgoblins.stoneflesh_item": "Stoneflesh",
+  "text.autoconfig.lootgoblins/lootgoblins.option.cooldown": "Item Link Cooldown (in ticks)",
   "text.autoconfig.lootgoblins/lootgoblins.option.enchantedBookChance": "Enchanted Book Drop Chance",
   "text.autoconfig.lootgoblins/lootgoblins.option.bonusCombatLootChance": "Bonus Combat Loot Drop Chance",
   "text.autoconfig.lootgoblins/lootgoblins.option.bonusCombatLootMax": "Max Bonus Combat Loot Drop",
