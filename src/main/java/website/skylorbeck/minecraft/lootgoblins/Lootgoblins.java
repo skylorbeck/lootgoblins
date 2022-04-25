@@ -1,16 +1,29 @@
 package website.skylorbeck.minecraft.lootgoblins;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.ArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.mixin.command.CommandManagerMixin;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.EntitySummonArgumentType;
+import net.minecraft.command.argument.OperationArgumentType;
+import net.minecraft.command.argument.TextArgumentType;
+import net.minecraft.command.suggestion.SuggestionProviders;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -25,12 +38,15 @@ import net.minecraft.item.Items;
 import net.minecraft.network.MessageType;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import software.bernie.geckolib3.GeckoLib;
@@ -40,8 +56,14 @@ import website.skylorbeck.minecraft.skylorlib.ConfigFileHandler;
 import website.skylorbeck.minecraft.skylorlib.DynamicRecipeLoader;
 import website.skylorbeck.minecraft.skylorlib.Registrar;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class Lootgoblins implements ModInitializer {
     public static final String MOD_ID = "lootgoblins";
@@ -177,13 +199,13 @@ public class Lootgoblins implements ModInitializer {
             sids.add(new Identifier("sentimentality3", "wool_boots"));
             LootTables.combat = sids.toArray(new Identifier[0]);
         }
-        if (FabricLoader.getInstance().isModLoaded("magehand")){
+        if (FabricLoader.getInstance().isModLoaded("magehand")) {
             ArrayList<Identifier> hands = new ArrayList<>(Arrays.stream(LootTables.blacklist).toList());
-            hands.add(new Identifier("magehand","copper"));
-            hands.add(new Identifier("magehand","iron"));
-            hands.add(new Identifier("magehand","gold"));
-            hands.add(new Identifier("magehand","diamond"));
-            hands.add(new Identifier("magehand","amethyst"));
+            hands.add(new Identifier("magehand", "copper"));
+            hands.add(new Identifier("magehand", "iron"));
+            hands.add(new Identifier("magehand", "gold"));
+            hands.add(new Identifier("magehand", "diamond"));
+            hands.add(new Identifier("magehand", "amethyst"));
             LootTables.blacklist = hands.toArray(new Identifier[0]);
         }
         LootTables.generic = ConfigFileHandler.initConfigFile("lootgoblins/generic_table.json", LootTables.generic);
@@ -200,9 +222,9 @@ public class Lootgoblins implements ModInitializer {
         LootTables.nether_goblin = ConfigFileHandler.initConfigFile("lootgoblins/nether_goblin_table.json", LootTables.nether_goblin);
         LootTables.ender_goblin = ConfigFileHandler.initConfigFile("lootgoblins/end_goblin_table.json", LootTables.ender_goblin);
         LootTables.cake = ConfigFileHandler.initConfigFile("lootgoblins/cake_table.json", LootTables.cake);
-        LootTables.plant_goblin = ConfigFileHandler.initConfigFile("lootgoblins/plant_goblin.json",LootTables.plant_goblin);
-        LootTables.witch_goblin = ConfigFileHandler.initConfigFile("lootgoblins/witch_goblin.json",LootTables.witch_goblin);
-        LootTables.blacklist = ConfigFileHandler.initConfigFile("lootgoblins/blacklist.json",LootTables.blacklist);
+        LootTables.plant_goblin = ConfigFileHandler.initConfigFile("lootgoblins/plant_goblin.json", LootTables.plant_goblin);
+        LootTables.witch_goblin = ConfigFileHandler.initConfigFile("lootgoblins/witch_goblin.json", LootTables.witch_goblin);
+        LootTables.blacklist = ConfigFileHandler.initConfigFile("lootgoblins/blacklist.json", LootTables.blacklist);
 
         regItem("gold_bone_", Declarer.GOLD_BONE);
         regItem("prismarine_pearl_", Declarer.PRISMARINE_PEARL);
@@ -232,15 +254,77 @@ public class Lootgoblins implements ModInitializer {
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_ZOMBIE, LootZombieEntity.createZombieAttributes());
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_GOBLIN, LootGoblinEntity.createMobAttributes());
 
-        ServerPlayNetworking.registerGlobalReceiver(getIdentifier("itemlink"),((server, player, handler, buf, responseSender) -> {
+        ServerPlayNetworking.registerGlobalReceiver(getIdentifier("itemlink"), ((server, player, handler, buf, responseSender) -> {
             Text text = buf.readText();
             Text playerDisplayName = player.getDisplayName();
-            TranslatableText translatableText = new TranslatableText("lootgoblins.itemlink.chat",playerDisplayName,text);
-            server.getPlayerManager().sendToAll(new GameMessageS2CPacket(translatableText, MessageType.CHAT,player.getUuid()));
+            TranslatableText translatableText = new TranslatableText("lootgoblins.itemlink.chat", playerDisplayName, text);
+            server.getPlayerManager().sendToAll(new GameMessageS2CPacket(translatableText, MessageType.CHAT, player.getUuid()));
         }
         ));
-    }
 
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            dispatcher.register(literal("lootgoblins")
+                    .requires(source -> source.hasPermissionLevel(2))
+                    .then(literal("blacklist")
+                            .then(literal("add")
+                                    .then(argument("entity", EntitySummonArgumentType.entitySummon())
+                                            .suggests(SuggestionProviders.SUMMONABLE_ENTITIES)
+                                            .executes((context -> {
+                                                ArrayList<Identifier> mobs = new ArrayList<>(Arrays.stream(LootTables.blacklist).toList());
+                                                mobs.add(EntitySummonArgumentType.getEntitySummon(context, "entity"));
+                                                LootTables.blacklist = mobs.toArray(new Identifier[0]);
+                                                GsonBuilder gsonBuilder = new GsonBuilder();
+                                                gsonBuilder.setPrettyPrinting();
+                                                Gson gson = gsonBuilder.create();
+                                                try {
+                                                    Files.write(Paths.get("config/lootgoblins/blacklist.json"), gson.toJson(LootTables.blacklist).getBytes());
+                                                    context.getSource().sendFeedback(Text.of("Added " + EntitySummonArgumentType.getEntitySummon(context, "entity").getPath() + " to blacklist.json"), true);
+                                                    return 1;
+                                                } catch (IOException e) {
+                                                    context.getSource().sendFeedback(Text.of("Failed to add to config file. " + e.getMessage()), false);
+                                                    return 0;
+                                                }
+                                            }))
+                                    ))));
+            dispatcher.register(literal("lootgoblins")
+                    .requires(source -> source.hasPermissionLevel(2))
+                    .then(literal("blacklist")
+                            .then(literal("remove")
+                                    .then(argument("entity", EntitySummonArgumentType.entitySummon())
+                                            .suggests(SuggestionProviders.SUMMONABLE_ENTITIES)
+                                            .executes((context -> {
+                                                ArrayList<Identifier> mobs = new ArrayList<>(Arrays.stream(LootTables.blacklist).toList());
+                                                mobs.remove(EntitySummonArgumentType.getEntitySummon(context, "entity"));
+                                                LootTables.blacklist = mobs.toArray(new Identifier[0]);
+                                                GsonBuilder gsonBuilder = new GsonBuilder();
+                                                gsonBuilder.setPrettyPrinting();
+                                                Gson gson = gsonBuilder.create();
+                                                try {
+                                                    Files.write(Paths.get("config/lootgoblins/blacklist.json"), gson.toJson(LootTables.blacklist).getBytes());
+                                                    context.getSource().sendFeedback(Text.of("Removed " + EntitySummonArgumentType.getEntitySummon(context, "entity").getPath() + " from blacklist.json"), true);
+                                                    return 1;
+                                                } catch (IOException e) {
+                                                    context.getSource().sendFeedback(Text.of("Failed to remove from config file. " + e.getMessage()), false);
+                                                    return 0;
+                                                }
+                                            }))
+                                    ))));
+            dispatcher.register(literal("lootgoblins")
+                    .then(literal("blacklist")
+                            .then(literal("list")
+                                            .executes((context -> {
+                                                ArrayList<Identifier> mobs = new ArrayList<>(Arrays.stream(LootTables.blacklist).toList());
+                                                StringBuilder names = new StringBuilder("LootGoblin Blacklisted mobs: ");
+                                                names.append(mobs.get(0));
+                                                for (int i = 1; i < mobs.size(); i++) {
+                                                    names.append(", ").append(mobs.get(i));
+                                                }
+                                                context.getSource().sendFeedback(Text.of(names.toString()),false);
+                                                return 1;
+                                            }))
+                                    )));
+        });
+    }
     private void regItem(String name, Item item) {
         Registrar.regItem(name, item, MOD_ID);
     }
