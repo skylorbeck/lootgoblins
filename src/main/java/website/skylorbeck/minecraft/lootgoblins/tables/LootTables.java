@@ -1,5 +1,6 @@
 package website.skylorbeck.minecraft.lootgoblins.tables;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -308,6 +309,13 @@ public class LootTables {
             Registry.ITEM.getId(Items.STRING),
             Registry.ITEM.getId(Items.GLOWSTONE_DUST),
             Registry.ITEM.getId(Items.BLAZE_POWDER),
+    };
+
+    public static Identifier[] blacklist ={
+            Registry.ENTITY_TYPE.getId(EntityType.GUARDIAN),
+            Registry.ENTITY_TYPE.getId(EntityType.ELDER_GUARDIAN),
+            Registry.ENTITY_TYPE.getId(EntityType.WITHER),
+            Registry.ENTITY_TYPE.getId(EntityType.ENDER_DRAGON),
     };
 
 }

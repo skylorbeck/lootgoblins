@@ -1,11 +1,14 @@
 package website.skylorbeck.minecraft.lootgoblins.mixin;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import website.skylorbeck.minecraft.lootgoblins.Declarer;
 import website.skylorbeck.minecraft.lootgoblins.entity.LootGoblinEntity;
 import website.skylorbeck.minecraft.lootgoblins.entity.iLootGoblin;
+import website.skylorbeck.minecraft.lootgoblins.tables.LootTables;
 
 import static website.skylorbeck.minecraft.lootgoblins.Lootgoblins.replaceEntity;
 
@@ -23,7 +27,14 @@ public class ServerWorldMixin {
     public void modspawn(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         ServerWorld world = (ServerWorld) (Object) this;
         if (world.random.nextFloat() < Declarer.config.goblinChance) {
-            if (!(entity instanceof iLootGoblin) && !(entity.isPlayer()) && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity) && !(entity instanceof GuardianEntity)) {
+
+            if (!(entity instanceof iLootGoblin) && !(entity.isPlayer())) {
+                for (Identifier typeID : LootTables.blacklist) {
+                    EntityType<?> entityType = Registry.ENTITY_TYPE.get(typeID);
+                    if (entity.getType() == entityType){
+                        return;
+                    }
+                }
                 if (entity instanceof SkeletonEntity skeletonEntity) {
                     replaceEntity(skeletonEntity, Declarer.LOOT_SKELETON, world);
                 } else if (entity instanceof ZombieEntity zombieEntity) {

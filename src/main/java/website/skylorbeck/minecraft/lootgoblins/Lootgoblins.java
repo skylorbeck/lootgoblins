@@ -177,6 +177,15 @@ public class Lootgoblins implements ModInitializer {
             sids.add(new Identifier("sentimentality3", "wool_boots"));
             LootTables.combat = sids.toArray(new Identifier[0]);
         }
+        if (FabricLoader.getInstance().isModLoaded("magehand")){
+            ArrayList<Identifier> hands = new ArrayList<>(Arrays.stream(LootTables.blacklist).toList());
+            hands.add(new Identifier("magehand","copper"));
+            hands.add(new Identifier("magehand","iron"));
+            hands.add(new Identifier("magehand","gold"));
+            hands.add(new Identifier("magehand","diamond"));
+            hands.add(new Identifier("magehand","amethyst"));
+            LootTables.blacklist = hands.toArray(new Identifier[0]);
+        }
         LootTables.generic = ConfigFileHandler.initConfigFile("lootgoblins/generic_table.json", LootTables.generic);
         LootTables.combat = ConfigFileHandler.initConfigFile("lootgoblins/combat_table.json", LootTables.combat);
         LootTables.musicDisks = ConfigFileHandler.initConfigFile("lootgoblins/music_table.json", LootTables.musicDisks);
@@ -193,6 +202,7 @@ public class Lootgoblins implements ModInitializer {
         LootTables.cake = ConfigFileHandler.initConfigFile("lootgoblins/cake_table.json", LootTables.cake);
         LootTables.plant_goblin = ConfigFileHandler.initConfigFile("lootgoblins/plant_goblin.json",LootTables.plant_goblin);
         LootTables.witch_goblin = ConfigFileHandler.initConfigFile("lootgoblins/witch_goblin.json",LootTables.witch_goblin);
+        LootTables.blacklist = ConfigFileHandler.initConfigFile("lootgoblins/blacklist.json",LootTables.blacklist);
 
         regItem("gold_bone_", Declarer.GOLD_BONE);
         regItem("prismarine_pearl_", Declarer.PRISMARINE_PEARL);
