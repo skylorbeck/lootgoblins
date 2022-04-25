@@ -222,31 +222,6 @@ public class Lootgoblins implements ModInitializer {
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_ZOMBIE, LootZombieEntity.createZombieAttributes());
         FabricDefaultAttributeRegistry.register(Declarer.LOOT_GOBLIN, LootGoblinEntity.createMobAttributes());
 
-        ServerEntityEvents.ENTITY_LOAD.register(((entity, world) -> {
-            if (world.random.nextFloat() < Declarer.config.goblinChance) {
-                if (!(entity instanceof iLootGoblin) && !(entity.isPlayer()) && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity) && !(entity instanceof GuardianEntity)) {
-                    if (entity instanceof SkeletonEntity skeletonEntity) {
-                        replaceEntity(skeletonEntity, Declarer.LOOT_SKELETON, world);
-                    } else if (entity instanceof ZombieEntity zombieEntity) {
-                        replaceEntity(zombieEntity, Declarer.LOOT_ZOMBIE, world);
-                    } else if (entity instanceof SpiderEntity spiderEntity) {
-                        replaceEntity(spiderEntity, Declarer.LOOT_SPIDER, world);
-                    } else if (entity instanceof CreeperEntity creeperEntity) {
-                        replaceEntity(creeperEntity, Declarer.LOOT_CREEPER, world);
-                    } else if (entity instanceof HoglinEntity hoglinEntity) {
-                        replaceEntity(hoglinEntity, Declarer.LOOT_HOGLIN, world);
-                    } else if (entity instanceof PillagerEntity illagerEntity) {
-                        replaceEntity(illagerEntity, Declarer.LOOT_ILLAGER, world);
-                    } else if (entity instanceof EndermanEntity endermanEntity) {
-                        replaceEntity(endermanEntity, Declarer.LOOT_ENDERMAN, world);
-                    } else if (entity instanceof LivingEntity) {
-                        LootGoblinEntity lootGoblin = (LootGoblinEntity) replaceEntity((LivingEntity) entity, Declarer.LOOT_GOBLIN, world);
-                        lootGoblin.setVariant(world.random.nextInt(8));
-                    }
-                }
-            }
-        }));
-
         ServerPlayNetworking.registerGlobalReceiver(getIdentifier("itemlink"),((server, player, handler, buf, responseSender) -> {
             Text text = buf.readText();
             Text playerDisplayName = player.getDisplayName();
@@ -264,7 +239,7 @@ public class Lootgoblins implements ModInitializer {
         Registrar.regBlock(name, block, MOD_ID);
     }
 
-    private LivingEntity replaceEntity(LivingEntity source, EntityType<?> target, ServerWorld world) {
+    public static LivingEntity replaceEntity(LivingEntity source, EntityType<?> target, ServerWorld world) {
         LivingEntity lootGoblin = (LivingEntity) target.create(world);
         lootGoblin.copyPositionAndRotation(source);
         for (EquipmentSlot slot : EquipmentSlot.values()) {
