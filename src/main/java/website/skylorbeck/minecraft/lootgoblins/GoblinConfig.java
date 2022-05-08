@@ -25,6 +25,7 @@ public class GoblinConfig implements ConfigData {
     public int bonusEnchantedBooksMax = 1;
     public float enchantedBookChance = 0.25f;
     public float recordChance = 0.05f;
-
     public int cooldown = 20;
+
+    public boolean minorGoblins = true;
 }

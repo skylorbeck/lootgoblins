@@ -35,6 +35,7 @@
   "text.autoconfig.lootgoblins/lootgoblins.option.recordChance": "Record Drop Chance",
   "text.autoconfig.lootgoblins/lootgoblins.option.titleAbove": "Title Above",
   "text.autoconfig.lootgoblins/lootgoblins.option.titleSmall": "Small Title",
+  "text.autoconfig.lootgoblins/lootgoblins.option.minorGoblins": "Spawn Minor Goblins",
   "text.autoconfig.lootgoblins/lootgoblins.title": "Loot Goblins Config",
 
   "lootgoblins.itemlink.chat": "%s linked %s",
