@@ -2,53 +2,28 @@ package website.skylorbeck.minecraft.lootgoblins;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.ArgumentType;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.mixin.command.CommandManagerMixin;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
-import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.EntitySummonArgumentType;
-import net.minecraft.command.argument.OperationArgumentType;
-import net.minecraft.command.argument.TextArgumentType;
 import net.minecraft.command.suggestion.SuggestionProviders;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.mob.*;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.MessageType;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import software.bernie.geckolib3.GeckoLib;
 import website.skylorbeck.minecraft.lootgoblins.entity.*;
 import website.skylorbeck.minecraft.lootgoblins.tables.LootTables;
@@ -257,12 +232,14 @@ public class Lootgoblins implements ModInitializer {
         ServerPlayNetworking.registerGlobalReceiver(getIdentifier("itemlink"), ((server, player, handler, buf, responseSender) -> {
             Text text = buf.readText();
             Text playerDisplayName = player.getDisplayName();
-            TranslatableText translatableText = new TranslatableText("lootgoblins.itemlink.chat", playerDisplayName, text);
-            server.getPlayerManager().sendToAll(new GameMessageS2CPacket(translatableText, MessageType.CHAT, player.getUuid()));
+            MutableText translatableText = Text.translatable("lootgoblins.itemlink.chat", playerDisplayName, text);
+            server.getPlayerManager().getPlayerList().forEach(serverPlayerEntity ->
+                    serverPlayerEntity.sendMessage(translatableText));
+//            server.getPlayerManager().sendToAll(new GameMessageS2CPacket(translatableText, player.getUuid()));
         }
         ));
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(literal("lootgoblins")
                     .requires(source -> source.hasPermissionLevel(2))
                     .then(literal("blacklist")

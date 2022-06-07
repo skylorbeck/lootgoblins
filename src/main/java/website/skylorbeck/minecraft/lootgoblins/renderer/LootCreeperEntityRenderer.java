@@ -13,7 +13,6 @@ import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import website.skylorbeck.minecraft.lootgoblins.Lootgoblins;
-import website.skylorbeck.minecraft.lootgoblins.entity.LootGoblinEntity;
 
 @Environment(value=EnvType.CLIENT)
 public class LootCreeperEntityRenderer extends CreeperEntityRenderer {

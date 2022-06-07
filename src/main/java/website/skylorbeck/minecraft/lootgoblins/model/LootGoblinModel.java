@@ -10,12 +10,12 @@ import website.skylorbeck.minecraft.lootgoblins.entity.LootGoblinEntity;
 
 public class LootGoblinModel extends AnimatedGeoModel<LootGoblinEntity> {
     @Override
-    public Identifier getModelLocation(LootGoblinEntity lootGoblin) {
+    public Identifier getModelResource(LootGoblinEntity lootGoblin) {
         return Lootgoblins.getIdentifier("geo/lootgoblin.geo.json");
     }
 
     @Override
-    public Identifier getTextureLocation(LootGoblinEntity lootGoblin) {
+    public Identifier getTextureResource(LootGoblinEntity lootGoblin) {
         return switch (lootGoblin.getVariant()){
             default -> Lootgoblins.getIdentifier("textures/entity/lootgoblin/lootgoblin.png");
             case 1 -> Lootgoblins.getIdentifier("textures/entity/lootgoblin/nethergoblin.png");
@@ -29,7 +29,7 @@ public class LootGoblinModel extends AnimatedGeoModel<LootGoblinEntity> {
     }
 
     @Override
-    public Identifier getAnimationFileLocation(LootGoblinEntity lootGoblin) {
+    public Identifier getAnimationResource(LootGoblinEntity lootGoblin) {
         return Lootgoblins.getIdentifier("animations/lootgoblin.animation.json");
     }
 

@@ -16,7 +16,7 @@ public class TitleRenderer {
         if (d > 4096.0) {
             return;
         }
-        String[] name = text.asString().split(" ");
+        String[] name = text.getString().split(" ");
         float Height = entity.getHeight() + 0.5f;
         matrices.push();
         matrices.translate(0.0, Height, 0.0);

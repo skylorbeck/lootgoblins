@@ -1,7 +1,5 @@
 package website.skylorbeck.minecraft.lootgoblins.tables;
 
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -11,10 +9,10 @@ import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
 import website.skylorbeck.minecraft.lootgoblins.Declarer;
 
-import java.util.Random;
 
 public class LootManager {
     public static void dropLoot(LivingEntity mob, Identifier[] mobSpecificDrop) {
